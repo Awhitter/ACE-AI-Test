@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, PlusCircle, MinusCircle, Activity, Star, ArrowUp } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
@@ -158,38 +158,25 @@ const InteractiveDiagram = () => {
 };
 
 const FloatingActionButton = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <>
-      <motion.div
-        className="fixed bottom-8 right-8 z-50"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
-        whileHover={{ scale: 1.1 }}
+    <motion.div
+      className="fixed bottom-8 right-8 z-50"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.1 }}
+    >
+      <button
+        onClick={scrollToTop}
+        className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
       >
-        <button
-          onClick={scrollToTop}
-          className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
-        >
-          <ArrowUp size={24} />
-        </button>
-      </motion.div>
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-blue-600 origin-left z-50"
-        style={{ scaleX }}
-      />
-    </>
+        <ArrowUp size={24} />
+      </button>
+    </motion.div>
   );
 };
 
