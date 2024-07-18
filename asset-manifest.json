@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ACE-Kristin-RapidDemo/static/css/main.df30a621.css",
-    "main.js": "/ACE-Kristin-RapidDemo/static/js/main.b39db13e.js",
-    "static/js/453.0b515713.chunk.js": "/ACE-Kristin-RapidDemo/static/js/453.0b515713.chunk.js",
-    "index.html": "/ACE-Kristin-RapidDemo/index.html",
-    "main.df30a621.css.map": "/ACE-Kristin-RapidDemo/static/css/main.df30a621.css.map",
-    "main.b39db13e.js.map": "/ACE-Kristin-RapidDemo/static/js/main.b39db13e.js.map",
-    "453.0b515713.chunk.js.map": "/ACE-Kristin-RapidDemo/static/js/453.0b515713.chunk.js.map"
+    "main.css": "/ACE-AI-Test/static/css/main.df30a621.css",
+    "main.js": "/ACE-AI-Test/static/js/main.ead168eb.js",
+    "static/js/453.0b515713.chunk.js": "/ACE-AI-Test/static/js/453.0b515713.chunk.js",
+    "index.html": "/ACE-AI-Test/index.html",
+    "main.df30a621.css.map": "/ACE-AI-Test/static/css/main.df30a621.css.map",
+    "main.ead168eb.js.map": "/ACE-AI-Test/static/js/main.ead168eb.js.map",
+    "453.0b515713.chunk.js.map": "/ACE-AI-Test/static/js/453.0b515713.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.df30a621.css",
-    "static/js/main.b39db13e.js"
+    "static/js/main.ead168eb.js"
   ]
 }
