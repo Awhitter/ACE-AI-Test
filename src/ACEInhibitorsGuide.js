@@ -201,7 +201,7 @@ const FloatingActionButton = () => {
 };
 
 const ACEInhibitorsGuide = () => {
-  const [expandedDrug, setExpandedDrug] = useState(null);
+  const [expandedDrugs, setExpandedDrugs] = useState({});
   const [completedSections, setCompletedSections] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -338,32 +338,38 @@ const ACEInhibitorsGuide = () => {
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.5, delay: index * 0.1}}
             >
-              <button
-                className="w-full text-left focus:outline-none"
-                onClick={() => setExpandedDrug(expandedDrug === drug.name ? null : drug.name)}
+              <motion.div
+                className="w-full"
+                animate={{ height: expandedDrugs[drug.name] ? 'auto' : '80px' }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="flex justify-between items-center">
-                  <span className="font-bold text-2xl">{drug.name}</span>
-                  {expandedDrug === drug.name ? <MinusCircle size={24} /> : <PlusCircle size={24} />}
-                </div>
-              </button>
-              <AnimatePresence>
-                {expandedDrug === drug.name && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto'}}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="mt-6 space-y-3 text-lg">
-                      <p><strong>Dosage:</strong> {drug.dosage}</p>
-                      <p><strong>Half-life:</strong> {drug.halfLife}</p>
-                      <p><strong>Renal Excretion:</strong> {drug.renalExcretion}</p>
-                      <p><strong>Key Notes:</strong> {drug.notes}</p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                <button
+                  className="w-full text-left focus:outline-none"
+                  onClick={() => setExpandedDrugs(prev => ({ ...prev, [drug.name]: !prev[drug.name] }))}
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="font-bold text-2xl">{drug.name}</span>
+                    {expandedDrugs[drug.name] ? <MinusCircle size={24} /> : <PlusCircle size={24} />}
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {expandedDrugs[drug.name] && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="mt-6 space-y-3 text-lg">
+                        <p><strong>Dosage:</strong> {drug.dosage}</p>
+                        <p><strong>Half-life:</strong> {drug.halfLife}</p>
+                        <p><strong>Renal Excretion:</strong> {drug.renalExcretion}</p>
+                        <p><strong>Key Notes:</strong> {drug.notes}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             </motion.div>
           ))}
         </div>
