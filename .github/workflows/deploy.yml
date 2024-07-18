@@ -23,15 +23,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Debug - List contents of build directory
+        run: ls -R build
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: build
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Debug - List contents of build directory
-        run: ls -R build
 
       - name: Debug - Display GitHub Pages URL
         run: |
