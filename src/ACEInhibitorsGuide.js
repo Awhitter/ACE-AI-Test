@@ -79,13 +79,13 @@ const InteractiveDiagram = () => {
   const [highlight, setHighlight] = useState(null);
   const [showInfo, setShowInfo] = useState(null);
 
-  const components = [
+  const components = useMemo(() => [
     { name: 'renin', label: 'Renin', color: 'blue', info: 'Enzyme released by kidneys in response to low blood pressure' },
     { name: 'angiotensinogen', label: 'Angiotensinogen', color: 'green', info: 'Precursor protein produced by the liver' },
     { name: 'angiotensin1', label: 'Angiotensin I', color: 'yellow', info: 'Inactive decapeptide formed from angiotensinogen' },
     { name: 'ace', label: 'ACE', color: 'purple', info: 'Angiotensin Converting Enzyme, target of ACE inhibitors' },
     { name: 'angiotensin2', label: 'Angiotensin II', color: 'red', info: 'Active octapeptide, potent vasoconstrictor' },
-  ];
+  ], []);
 
   return (
     <motion.div
@@ -96,7 +96,7 @@ const InteractiveDiagram = () => {
     >
       <h3 className="font-bold mb-8 text-3xl text-blue-900 text-center">ACE Inhibitor Mechanism of Action</h3>
       <div className="relative mb-12">
-        <svg className="w-full h-auto" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet">
+        <svg className="w-full h-auto max-w-3xl mx-auto" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet">
           <defs>
             <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
               <polygon points="0 0, 10 3.5, 0 7" fill="#4B5563" />
@@ -143,14 +143,19 @@ const InteractiveDiagram = () => {
           )}
         </svg>
         {showInfo && (
-          <motion.div
-            className="absolute left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-white rounded-xl shadow-lg max-w-md w-full"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-          >
-            <p className="text-gray-800 text-center">{components.find(c => c.name === showInfo).info}</p>
-          </motion.div>
+          <AnimatePresence>
+            {showInfo && (
+              <motion.div
+                className="absolute left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-white rounded-xl shadow-lg max-w-md w-full"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <p className="text-gray-800 text-center">{components.find(c => c.name === showInfo).info}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         )}
       </div>
       <motion.div
@@ -335,11 +340,11 @@ const ACEInhibitorsGuide = () => {
         onComplete={updateCompletedSections}
       >
         <p className="mb-8 text-gray-700 leading-relaxed text-xl">Key ACE Inhibitors to remember for the FNP exam (LERCA-B):</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 max-w-6xl mx-auto">
           {drugs.map((drug, index) => (
             <motion.div
               key={drug.name}
-              className={`p-6 rounded-2xl transition-all duration-300 ${drug.color} border-2 shadow-xl hover:shadow-2xl`}
+              className={`p-6 rounded-2xl transition-all duration-300 ${drug.color} border-2 shadow-xl hover:shadow-2xl cursor-pointer`}
               whileHover={{scale: 1.03}}
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
