@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, CheckCircle, ArrowUp, MinusCircle, PlusCircle } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
@@ -99,7 +99,11 @@ const FloatingActionButton = () => {
   );
 };
 
-const ACEInhibitorsGuide = () => {
+const ACEInhibitorsGuide = ({ debug = false }) => {
+  if (debug) {
+    console.log('ACEInhibitorsGuide rendering in debug mode');
+  }
+  console.log('ACEInhibitorsGuide rendering');
   const [completedSections, setCompletedSections] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [expandedDrugs, setExpandedDrugs] = useState({});
@@ -386,7 +390,9 @@ const ACEInhibitorsGuide = () => {
           keyTakeaway="Reinforce your understanding of ACE Inhibitors with this interactive quiz."
           onComplete={updateCompletedSections}
         >
-          <Quiz />
+          <Suspense fallback={<div>Loading Quiz...</div>}>
+            <Quiz />
+          </Suspense>
         </Section>
       </div>
     </div>
