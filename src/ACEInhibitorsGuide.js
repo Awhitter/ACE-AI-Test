@@ -77,84 +77,107 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
 
 const InteractiveDiagram = () => {
   const [highlight, setHighlight] = useState(null);
+  const [showInfo, setShowInfo] = useState(null);
+
+  const components = [
+    { name: 'renin', label: 'Renin', color: 'blue', info: 'Enzyme released by kidneys in response to low blood pressure' },
+    { name: 'angiotensinogen', label: 'Angiotensinogen', color: 'green', info: 'Precursor protein produced by the liver' },
+    { name: 'angiotensin1', label: 'Angiotensin I', color: 'yellow', info: 'Inactive decapeptide formed from angiotensinogen' },
+    { name: 'ace', label: 'ACE', color: 'purple', info: 'Angiotensin Converting Enzyme, target of ACE inhibitors' },
+    { name: 'angiotensin2', label: 'Angiotensin II', color: 'red', info: 'Active octapeptide, potent vasoconstrictor' },
+  ];
 
   return (
     <motion.div
-      className="mt-8 p-8 bg-gradient-to-br from-gray-100 to-blue-100 rounded-xl shadow-lg"
+      className="mt-12 p-8 bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl shadow-2xl"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className="font-bold mb-6 text-2xl text-blue-800">ACE Inhibitor Mechanism of Action:</h3>
-      <div className="flex flex-col items-center space-y-8">
-        <motion.div 
-          className="relative w-full max-w-2xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="absolute top-1/2 left-0 right-0 h-2 bg-gradient-to-r from-blue-300 via-blue-500 to-red-500 transform -translate-y-1/2"></div>
-          <div className="flex justify-between items-center relative z-10">
-            <motion.div 
-              className="bg-blue-100 p-4 rounded-lg shadow-md"
-              whileHover={{ scale: 1.05 }}
-              onMouseEnter={() => setHighlight('renin')}
-              onMouseLeave={() => setHighlight(null)}
-            >
-              <p className="font-semibold text-blue-800">Renin</p>
-            </motion.div>
-            <motion.div 
-              className="bg-blue-200 p-4 rounded-lg shadow-md"
-              whileHover={{ scale: 1.05 }}
-              onMouseEnter={() => setHighlight('angiotensinogen')}
-              onMouseLeave={() => setHighlight(null)}
-            >
-              <p className="font-semibold text-blue-800">Angiotensinogen</p>
-            </motion.div>
-            <motion.div 
-              className="bg-blue-300 p-4 rounded-lg shadow-md"
-              whileHover={{ scale: 1.05 }}
-              onMouseEnter={() => setHighlight('angiotensin1')}
-              onMouseLeave={() => setHighlight(null)}
-            >
-              <p className="font-semibold text-blue-800">Angiotensin I</p>
-            </motion.div>
-            <motion.div 
-              className="bg-red-300 p-4 rounded-lg shadow-md"
-              whileHover={{ scale: 1.05 }}
-              onMouseEnter={() => setHighlight('angiotensin2')}
-              onMouseLeave={() => setHighlight(null)}
-            >
-              <p className="font-semibold text-red-800">Angiotensin II</p>
-            </motion.div>
-          </div>
-        </motion.div>
-        <motion.div 
-          className="bg-yellow-100 p-4 rounded-lg shadow-md"
-          whileHover={{ scale: 1.05 }}
-          onMouseEnter={() => setHighlight('ace')}
-          onMouseLeave={() => setHighlight(null)}
-        >
-          <p className="font-semibold text-yellow-800">ACE (Angiotensin Converting Enzyme)</p>
-        </motion.div>
+      <h3 className="font-bold mb-8 text-3xl text-blue-900 text-center">ACE Inhibitor Mechanism of Action</h3>
+      <div className="relative">
+        <svg className="w-full h-64" viewBox="0 0 800 200">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#4B5563" />
+            </marker>
+          </defs>
+          <line x1="100" y1="100" x2="700" y2="100" stroke="#4B5563" strokeWidth="2" markerEnd="url(#arrowhead)" />
+          {components.map((component, index) => (
+            <g key={component.name} transform={`translate(${100 + index * 150}, 100)`}>
+              <motion.circle
+                r="40"
+                fill={highlight === component.name ? `url(#gradient-${component.color})` : '#fff'}
+                stroke={`#${component.color}600`}
+                strokeWidth="3"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: index * 0.1, type: 'spring', stiffness: 300, damping: 20 }}
+                whileHover={{ scale: 1.1 }}
+                onMouseEnter={() => { setHighlight(component.name); setShowInfo(component.name); }}
+                onMouseLeave={() => { setHighlight(null); setShowInfo(null); }}
+              />
+              <text textAnchor="middle" dy=".3em" className="text-sm font-semibold fill-current text-gray-800">
+                {component.label}
+              </text>
+              <defs>
+                <radialGradient id={`gradient-${component.color}`}>
+                  <stop offset="0%" stopColor={`#${component.color}200`} />
+                  <stop offset="100%" stopColor={`#${component.color}400`} />
+                </radialGradient>
+              </defs>
+            </g>
+          ))}
+          {highlight === 'ace' && (
+            <motion.line
+              x1="400" y1="100" x2="550" y2="100"
+              stroke="#EF4444"
+              strokeWidth="4"
+              strokeDasharray="8,8"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.5 }}
+            />
+          )}
+        </svg>
+        {showInfo && (
+          <motion.div
+            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-white rounded-xl shadow-lg max-w-md"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+          >
+            <p className="text-gray-800">{components.find(c => c.name === showInfo).info}</p>
+          </motion.div>
+        )}
       </div>
       <motion.div
-        className="mt-8 p-4 bg-white bg-opacity-75 rounded-lg shadow-inner"
+        className="mt-12 p-6 bg-white bg-opacity-90 rounded-2xl shadow-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.3, delay: 0.5 }}
       >
-        <h4 className="font-semibold text-lg mb-2 text-gray-800">Key Points:</h4>
-        <ul className="list-disc pl-5 space-y-2 text-gray-700">
-          <motion.li initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
-            ACE Inhibitors block the conversion of Angiotensin I to Angiotensin II
-          </motion.li>
-          <motion.li initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-            This leads to decreased vasoconstriction and reduced aldosterone secretion
-          </motion.li>
-          <motion.li initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-            Results in lowered blood pressure and decreased workload on the heart
-          </motion.li>
+        <h4 className="font-semibold text-xl mb-4 text-blue-900">Key Points:</h4>
+        <ul className="space-y-4 text-gray-700">
+          {[
+            "ACE Inhibitors block the conversion of Angiotensin I to Angiotensin II",
+            "This leads to decreased vasoconstriction and reduced aldosterone secretion",
+            "Results in lowered blood pressure and decreased workload on the heart",
+            "ACE Inhibitors also increase bradykinin levels, contributing to their beneficial effects"
+          ].map((point, index) => (
+            <motion.li
+              key={index}
+              className="flex items-start"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.7 + index * 0.1 }}
+            >
+              <svg className="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>{point}</span>
+            </motion.li>
+          ))}
         </ul>
       </motion.div>
     </motion.div>
