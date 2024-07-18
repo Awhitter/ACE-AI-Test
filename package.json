@@ -53,6 +53,8 @@
   },
   "resolutions": {
     "postcss": "^8.4.31",
-    "nth-check": "^2.0.1"
+    "nth-check": "^2.1.1",
+    "css-select": "^5.1.0",
+    "svgo": "^3.2.0"
   }
 }
