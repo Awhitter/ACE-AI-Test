@@ -412,44 +412,7 @@ const ACEInhibitorsGuideComponent = () => {
   );
 };
 
-const FloatingActionButton = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  return (
-    <motion.div
-      className="fixed bottom-8 right-8 z-50"
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      whileHover={{ scale: 1.1 }}
-    >
-      <button
-        onClick={scrollToTop}
-        className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
-      >
-        <ArrowUp size={24} />
-      </button>
-    </motion.div>
-  );
-};
-
-const ACEInhibitorsGuide = () => {
-  const [expandedDrugs, setExpandedDrugs] = useState({});
-  const [completedSections, setCompletedSections] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const updateCompletedSections = useCallback(() => {
-    setCompletedSections(prev => Math.min(prev + 1, totalSections));
-  }, []);
-
-  const drugs = useMemo(() => [
+export default ACEInhibitorsGuide;
     { 
       name: 'Lisinopril', 
       color: 'bg-gradient-to-r from-teal-100 to-teal-200 border-teal-500 text-teal-800',
