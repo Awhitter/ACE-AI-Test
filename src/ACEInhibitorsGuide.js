@@ -102,6 +102,7 @@ const FloatingActionButton = () => {
 const ACEInhibitorsGuide = () => {
   const [completedSections, setCompletedSections] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [expandedDrugs, setExpandedDrugs] = useState({});
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1500);
