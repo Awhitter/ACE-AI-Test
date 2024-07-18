@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ACE-AI-Test/static/css/main.df30a621.css",
-    "main.js": "/ACE-AI-Test/static/js/main.ead168eb.js",
+    "main.css": "/ACE-AI-Test/static/css/main.57e07739.css",
+    "main.js": "/ACE-AI-Test/static/js/main.1d3db2dc.js",
     "static/js/453.0b515713.chunk.js": "/ACE-AI-Test/static/js/453.0b515713.chunk.js",
     "index.html": "/ACE-AI-Test/index.html",
-    "main.df30a621.css.map": "/ACE-AI-Test/static/css/main.df30a621.css.map",
-    "main.ead168eb.js.map": "/ACE-AI-Test/static/js/main.ead168eb.js.map",
+    "main.57e07739.css.map": "/ACE-AI-Test/static/css/main.57e07739.css.map",
+    "main.1d3db2dc.js.map": "/ACE-AI-Test/static/js/main.1d3db2dc.js.map",
     "453.0b515713.chunk.js.map": "/ACE-AI-Test/static/js/453.0b515713.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.df30a621.css",
-    "static/js/main.ead168eb.js"
+    "static/css/main.57e07739.css",
+    "static/js/main.1d3db2dc.js"
   ]
 }
