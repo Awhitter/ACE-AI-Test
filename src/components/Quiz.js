@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, XCircle, RefreshCw, Award, ArrowRight } from 'lucide-react';
 
@@ -76,15 +76,15 @@ const Quiz = () => {
     } else if (timeLeft === 0 && !showExplanation) {
       handleAnswerClick(null);
     }
-  }, [timeLeft, quizStarted, showExplanation]);
+  }, [timeLeft, quizStarted, showExplanation, handleAnswerClick]);
 
-  const handleAnswerClick = (selectedIndex) => {
+  const handleAnswerClick = useCallback((selectedIndex) => {
     setSelectedAnswer(selectedIndex);
     setShowExplanation(true);
     if (selectedIndex === quizQuestions[currentQuestion].correctAnswer) {
-      setScore(score + 1);
+      setScore(prevScore => prevScore + 1);
     }
-  };
+  }, [currentQuestion]);
 
   const handleNextQuestion = () => {
     const nextQuestion = currentQuestion + 1;
