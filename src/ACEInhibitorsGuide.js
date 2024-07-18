@@ -268,6 +268,14 @@ const ACEInhibitorsGuide = () => {
     );
   }
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-600"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-7xl mx-auto bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen text-white">
       <FloatingActionButton />
