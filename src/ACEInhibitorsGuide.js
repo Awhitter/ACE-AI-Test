@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, PlusCircle, MinusCircle, Activity, Star, ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -16,6 +16,8 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
     }
   }, [inView, onComplete]);
 
+  const toggleOpen = useCallback(() => setIsOpen(prev => !prev), []);
+
   return (
     <motion.div
       ref={ref}
@@ -26,7 +28,7 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
     >
       <motion.button
         className="w-full text-left p-6 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 transition-colors flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleOpen}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
@@ -72,7 +74,7 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
 };
 
 const InteractiveDiagram = () => {
-  const [, setHighlight] = useState(null);
+  const [highlight, setHighlight] = useState(null);
 
   return (
     <motion.div
@@ -189,6 +191,10 @@ const ACEInhibitorsGuide = () => {
     // Simulate loading time
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
+  }, []);
+
+  const updateCompletedSections = useCallback(() => {
+    setCompletedSections(prev => Math.min(prev + 1, totalSections));
   }, []);
 
   if (isLoading) {
