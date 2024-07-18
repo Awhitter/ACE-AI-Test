@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r https://github.com/awhitter/ACE-AI-Test.git"
+    "deploy": "gh-pages -d build -r https://github.com/Awhitter/ACE-AI-Test.git"
   },
   "eslintConfig": {
     "extends": [
