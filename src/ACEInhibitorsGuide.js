@@ -280,11 +280,14 @@ const ACEInhibitorsGuide = () => {
                 Beyond their effects on the renin-angiotensin-aldosterone system, ACE inhibitors also have other beneficial effects, such as improving endothelial function, reducing oxidative stress, and inhibiting the breakdown of bradykinin, a vasodilator.
               </p>
               {/* InteractiveDiagram component removed */}
+            </Section>
+
+            <Section
               title="Clinical Indications"
               icon={BookOpen}
               keyTakeaway="ACE inhibitors are widely used in the treatment of hypertension, heart failure, diabetic nephropathy, and other cardiovascular conditions."
               onComplete={updateCompletedSections}
-            {'>'}
+            >
               <p className="text-gray-700 leading-relaxed mb-4">
                 ACE inhibitors are widely prescribed for various cardiovascular conditions, including:
               </p>
