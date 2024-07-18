@@ -1,20 +1,22 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, PlusCircle, MinusCircle, Activity, Star, ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasCompleted, setHasCompleted] = useState(false);
   const [ref, inView] = useInView({
     threshold: 0.5,
     triggerOnce: true
   });
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !hasCompleted) {
       onComplete();
+      setHasCompleted(true);
     }
-  }, [inView, onComplete]);
+  }, [inView, onComplete, hasCompleted]);
 
   const toggleOpen = useCallback(() => setIsOpen(prev => !prev), []);
 
@@ -197,15 +199,7 @@ const ACEInhibitorsGuide = () => {
     setCompletedSections(prev => Math.min(prev + 1, totalSections));
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
-
-  const drugs = [
+  const drugs = useMemo(() => [
     { 
       name: 'Lisinopril', 
       color: 'bg-teal-100 border-teal-500 text-teal-800',
@@ -249,6 +243,14 @@ const ACEInhibitorsGuide = () => {
   ];
 
   const totalSections = 4;
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto p-8 bg-gradient-to-br from-gray-50 to-blue-100 min-h-screen text-gray-800">
