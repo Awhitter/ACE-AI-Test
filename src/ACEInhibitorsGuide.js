@@ -250,10 +250,6 @@ const ACEInhibitorsGuide = () => {
 
   const totalSections = 4;
 
-  const updateCompletedSections = () => {
-    setCompletedSections(prev => Math.min(prev + 1, totalSections));
-  };
-
   return (
     <div className="max-w-7xl mx-auto p-8 bg-gradient-to-br from-gray-50 to-blue-100 min-h-screen text-gray-800">
       <FloatingActionButton />
