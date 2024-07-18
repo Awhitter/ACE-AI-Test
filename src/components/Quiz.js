@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, XCircle, RefreshCw } from 'lucide-react';
+import { CheckCircle, XCircle, RefreshCw, Award, ArrowRight } from 'lucide-react';
 
 const quizQuestions = [
   {
@@ -66,6 +66,17 @@ const Quiz = () => {
   const [showScore, setShowScore] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(30);
+  const [quizStarted, setQuizStarted] = useState(false);
+
+  useEffect(() => {
+    if (quizStarted && timeLeft > 0 && !showExplanation) {
+      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearTimeout(timer);
+    } else if (timeLeft === 0 && !showExplanation) {
+      handleAnswerClick(null);
+    }
+  }, [timeLeft, quizStarted, showExplanation]);
 
   const handleAnswerClick = (selectedIndex) => {
     setSelectedAnswer(selectedIndex);
@@ -81,6 +92,7 @@ const Quiz = () => {
       setCurrentQuestion(nextQuestion);
       setSelectedAnswer(null);
       setShowExplanation(false);
+      setTimeLeft(30);
     } else {
       setShowScore(true);
     }
@@ -92,12 +104,35 @@ const Quiz = () => {
     setShowScore(false);
     setSelectedAnswer(null);
     setShowExplanation(false);
+    setTimeLeft(30);
+    setQuizStarted(false);
+  };
+
+  const startQuiz = () => {
+    setQuizStarted(true);
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
+      <h2 className="text-3xl font-bold mb-6 text-center text-blue-800">ACE Inhibitors Quiz</h2>
       <AnimatePresence mode="wait">
-        {showScore ? (
+        {!quizStarted ? (
+          <motion.div
+            key="start"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="text-center"
+          >
+            <p className="text-xl mb-6">Test your knowledge about ACE Inhibitors!</p>
+            <button
+              onClick={startQuiz}
+              className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 text-lg font-semibold shadow-lg"
+            >
+              Start Quiz
+            </button>
+          </motion.div>
+        ) : showScore ? (
           <motion.div
             key="score"
             initial={{ opacity: 0 }}
@@ -105,11 +140,12 @@ const Quiz = () => {
             exit={{ opacity: 0 }}
             className="text-center"
           >
+            <Award className="w-16 h-16 mx-auto mb-4 text-yellow-500" />
             <h2 className="text-2xl font-bold mb-4">Quiz Completed!</h2>
-            <p className="text-xl mb-4">You scored {score} out of {quizQuestions.length}</p>
+            <p className="text-xl mb-6">You scored {score} out of {quizQuestions.length}</p>
             <button
               onClick={resetQuiz}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-200 flex items-center mx-auto"
+              className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 flex items-center mx-auto text-lg font-semibold shadow-lg"
             >
               <RefreshCw className="w-5 h-5 mr-2" />
               Retake Quiz
@@ -121,35 +157,41 @@ const Quiz = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
+            className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl shadow-inner"
           >
-            <h2 className="text-xl font-bold mb-4">Question {currentQuestion + 1} of {quizQuestions.length}</h2>
-            <p className="mb-4">{quizQuestions[currentQuestion].question}</p>
-            <div className="space-y-2">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold text-blue-800">Question {currentQuestion + 1} of {quizQuestions.length}</h3>
+              <div className="text-lg font-semibold text-blue-600">Time left: {timeLeft}s</div>
+            </div>
+            <p className="mb-6 text-lg">{quizQuestions[currentQuestion].question}</p>
+            <div className="space-y-3">
               {quizQuestions[currentQuestion].options.map((option, index) => (
-                <button
+                <motion.button
                   key={index}
                   onClick={() => handleAnswerClick(index)}
-                  className={`w-full p-2 text-left rounded transition-colors duration-200 flex items-center
+                  className={`w-full p-3 text-left rounded-lg transition-colors duration-200 flex items-center
                     ${selectedAnswer === null
-                      ? 'bg-white border border-blue-300 hover:bg-blue-50'
+                      ? 'bg-white hover:bg-blue-50 shadow-md'
                       : selectedAnswer === index
                         ? index === quizQuestions[currentQuestion].correctAnswer
-                          ? 'bg-green-100 border border-green-500'
-                          : 'bg-red-100 border border-red-500'
+                          ? 'bg-green-100 border-2 border-green-500'
+                          : 'bg-red-100 border-2 border-red-500'
                         : index === quizQuestions[currentQuestion].correctAnswer
-                          ? 'bg-green-100 border border-green-500'
-                          : 'bg-white border border-blue-300'
+                          ? 'bg-green-100 border-2 border-green-500'
+                          : 'bg-white'
                     }`}
                   disabled={selectedAnswer !== null}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <span className="flex-grow">{option}</span>
+                  <span className="flex-grow text-lg">{option}</span>
                   {selectedAnswer !== null && index === quizQuestions[currentQuestion].correctAnswer && (
-                    <CheckCircle className="w-5 h-5 text-green-500 ml-2" />
+                    <CheckCircle className="w-6 h-6 text-green-500 ml-2" />
                   )}
                   {selectedAnswer === index && index !== quizQuestions[currentQuestion].correctAnswer && (
-                    <XCircle className="w-5 h-5 text-red-500 ml-2" />
+                    <XCircle className="w-6 h-6 text-red-500 ml-2" />
                   )}
-                </button>
+                </motion.button>
               ))}
             </div>
             <AnimatePresence>
@@ -158,9 +200,9 @@ const Quiz = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="mt-4 p-4 bg-blue-50 rounded-lg"
+                  className="mt-6 p-4 bg-blue-100 rounded-lg border-l-4 border-blue-500"
                 >
-                  <p className="text-blue-800">{quizQuestions[currentQuestion].explanation}</p>
+                  <p className="text-blue-800 text-lg">{quizQuestions[currentQuestion].explanation}</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -168,10 +210,11 @@ const Quiz = () => {
               <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-200"
+                className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 flex items-center mx-auto text-lg font-semibold shadow-lg"
                 onClick={handleNextQuestion}
               >
                 {currentQuestion < quizQuestions.length - 1 ? 'Next Question' : 'Finish Quiz'}
+                <ArrowRight className="w-5 h-5 ml-2" />
               </motion.button>
             )}
           </motion.div>
