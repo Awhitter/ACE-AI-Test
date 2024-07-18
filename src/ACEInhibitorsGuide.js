@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, Star, CheckCircle } from 'lucide-react';
+import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, Star, CheckCircle, Heart } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import Timeline from './components/Timeline';
 import SideEffectsDiagram from './components/SideEffectsDiagram';
@@ -25,35 +25,36 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
   return (
     <motion.div
       ref={ref}
-      className="mb-12 rounded-3xl overflow-hidden shadow-2xl bg-white"
+      className="mb-6 border border-gray-200 rounded-lg overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md bg-white"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <motion.button
-        className="w-full text-left p-8 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 flex items-center justify-between focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50"
+        className="w-full text-left p-5 bg-gradient-to-r from-indigo-50 to-blue-50 hover:from-indigo-100 hover:to-blue-100 transition-colors flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
       >
-        <span className="flex items-center text-3xl font-extrabold text-white">
-          <Icon className="w-10 h-10 mr-5 text-blue-100" />
+        <span className="flex items-center text-lg font-semibold text-gray-800">
+          <Icon className="w-6 h-6 mr-3 text-indigo-600" />
           {title}
         </span>
-        <ChevronDown className={`w-8 h-8 text-white transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-5 h-5 text-gray-500 transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </motion.button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="p-8 pt-0"
+            className="overflow-hidden transition-all duration-300 ease-in-out"
             initial={{ height: 0 }}
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <p className="text-gray-700 leading-relaxed mb-8">{keyTakeaway}</p>
-            {children}
+            <div className="p-5 border-t border-gray-100">
+              <p className="text-gray-700 leading-relaxed mb-4">{keyTakeaway}</p>
+              {children}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
