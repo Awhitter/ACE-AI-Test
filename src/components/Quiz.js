@@ -85,12 +85,6 @@ const Quiz = () => {
       handleAnswerClick(null);
     }
   }, [timeLeft, quizStarted, showExplanation, handleAnswerClick]);
-    setSelectedAnswer(selectedIndex);
-    setShowExplanation(true);
-    if (selectedIndex === quizQuestions[currentQuestion].correctAnswer) {
-      setScore(prevScore => prevScore + 1);
-    }
-  }, [currentQuestion]);
 
   const handleNextQuestion = () => {
     const nextQuestion = currentQuestion + 1;
