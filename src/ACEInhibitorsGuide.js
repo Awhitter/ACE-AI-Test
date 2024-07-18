@@ -76,13 +76,29 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
       </AnimatePresence>
     </motion.div>
   );
-};
+  
+  const FloatingActionButton = () => {
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    };
 
-const FloatingActionButton = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
+  return (
+    <motion.div
+      className="fixed bottom-8 right-8 z-50"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.1 }}
+    >
+      <button
+        onClick={scrollToTop}
+        className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
+      >
+        <ArrowUp size={24} />
+      </button>
+    </motion.div>
+  );
   return (
     <motion.div
       className="fixed bottom-8 right-8 z-50"
@@ -101,7 +117,7 @@ const FloatingActionButton = () => {
   );
 };
 
-const ACEInhibitorsGuide = () => {
+const ACEInhibitorsGuideComponent = () => {
   const [expandedDrugs, setExpandedDrugs] = useState({});
   const [completedSections, setCompletedSections] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -484,8 +500,7 @@ const ACEInhibitorsGuide = () => {
         <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-600"></div>
       </div>
     );
-  }
-
+  }}
   return (
     <div className="max-w-7xl mx-auto bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen text-white">
       <FloatingActionButton />
@@ -557,161 +572,157 @@ const ACEInhibitorsGuide = () => {
         <Section 
           title="Common ACE Inhibitors" 
           icon={Droplet}
-          keyTakeaway="Remember the mnemonic 'LERCA-B' for key drugs: Lisinopril, Enalapril, Ramipril, Captopril, Benazepril"
+          keyTakeaway="Remember the mnemonic 'LERCA-B' for common ACE inhibitors."
           onComplete={updateCompletedSections}
         >
           <p className="mb-8 text-gray-700 leading-relaxed text-xl">Key ACE Inhibitors to remember for the FNP exam (LERCA-B):</p>
-            <DrugComparisonTable drugs={drugs} />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 max-w-6xl mx-auto">
-              {drugs.map((drug, index) => (
+          <DrugComparisonTable drugs={drugs} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 max-w-6xl mx-auto">
+            {drugs.map((drug, index) => (
+              <motion.div
+                key={drug.name}
+                className={`p-6 rounded-2xl transition-all duration-300 ${drug.color} border-2 shadow-xl hover:shadow-2xl cursor-pointer`}
+                whileHover={{scale: 1.03}}
+                initial={{opacity: 0, y: 20}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.5, delay: index * 0.1}}
+              >
                 <motion.div
-                  key={drug.name}
-                  className={`p-6 rounded-2xl transition-all duration-300 ${drug.color} border-2 shadow-xl hover:shadow-2xl cursor-pointer`}
-                  whileHover={{scale: 1.03}}
-                  initial={{opacity: 0, y: 20}}
-                  animate={{opacity: 1, y: 0}}
-                  transition={{duration: 0.5, delay: index * 0.1}}
+                  className="w-full"
+                  animate={{ height: expandedDrugs[drug.name] ? 'auto' : '80px' }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <motion.div
-                    className="w-full"
-                    animate={{ height: expandedDrugs[drug.name] ? 'auto' : '80px' }}
-                    transition={{ duration: 0.3 }}
+                  <button
+                    className="w-full text-left focus:outline-none"
+                    onClick={() => setExpandedDrugs(prev => ({ ...prev, [drug.name]: !prev[drug.name] }))}
                   >
-                    <button
-                      className="w-full text-left focus:outline-none"
-                      onClick={() => setExpandedDrugs(prev => ({ ...prev, [drug.name]: !prev[drug.name] }))}
-                    >
-                      <div className="flex justify-between items-center">
-                        <span className="font-bold text-2xl">{drug.name}</span>
-                        {expandedDrugs[drug.name] ? <MinusCircle size={24} /> : <PlusCircle size={24} />}
-                      </div>
-                    </button>
-                    <AnimatePresence>
-                      {expandedDrugs[drug.name] && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <div className="mt-6 space-y-3 text-lg">
-                            <p><strong>Dosage:</strong> {drug.dosage}</p>
-                            <p><strong>Half-life:</strong> {drug.halfLife}</p>
-                            <p><strong>Renal Excretion:</strong> {drug.renalExcretion}</p>
-                            <p><strong>Key Notes:</strong> {drug.notes}</p>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-2xl">{drug.name}</span>
+                      {expandedDrugs[drug.name] ? <MinusCircle size={24} /> : <PlusCircle size={24} />}
+                    </div>
+                  </button>
+                  <AnimatePresence>
+                    {expandedDrugs[drug.name] && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="mt-6 space-y-3 text-lg">
+                          <p><strong>Dosage:</strong> {drug.dosage}</p>
+                          <p><strong>Half-life:</strong> {drug.halfLife}</p>
+                          <p><strong>Renal Excretion:</strong> {drug.renalExcretion}</p>
+                          <p><strong>Key Notes:</strong> {drug.notes}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
-              ))}
-            </div>
-          </Section>
-  
-          <Section
-            title="Clinical Indications"
-            icon={BookOpen}
-            keyTakeaway="ACE inhibitors are widely used in hypertension, heart failure, diabetic nephropathy, and other cardiovascular conditions."
-            onComplete={updateCompletedSections}
-          >
-            <p className="mb-4 text-gray-700 leading-relaxed text-lg">
-              ACE inhibitors are commonly prescribed for the following conditions:
-            </p>
-            <ul className="list-disc pl-8 mb-8 text-gray-700 leading-relaxed text-lg">
-              <li>Hypertension</li>
-              <li>Heart failure</li>
-              <li>Diabetic nephropathy</li>
-              <li>Myocardial infarction (heart attack)</li>
-              <li>Left ventricular dysfunction</li>
-              <li>Chronic kidney disease</li>
-            </ul>
-            <p className="mb-4 text-gray-700 leading-relaxed text-lg">
-              In hypertension, ACE inhibitors are often used as first-line therapy or in combination with other antihypertensive medications. They are particularly effective in patients with diabetes, heart failure, or kidney disease.
-            </p>
-            <p className="mb-4 text-gray-700 leading-relaxed text-lg">
-              In heart failure, ACE inhibitors have been shown to improve symptoms, reduce hospitalizations, and prolong survival. They are recommended for all patients with heart failure with reduced ejection fraction (HFrEF) unless contraindicated.
-            </p>
-            <p className="mb-4 text-gray-700 leading-relaxed text-lg">
-              For patients with diabetic nephropathy, ACE inhibitors can slow the progression of kidney disease and reduce the risk of cardiovascular events.
-            </p>
-          </Section>
-  
-          <Section
-            title="Side Effects and Precautions"
-            icon={AlertTriangle}
-            keyTakeaway="Common side effects include cough, hyperkalemia, and angioedema. ACE inhibitors are contraindicated in pregnancy."
-            onComplete={updateCompletedSections}
-          >
-            <p className="mb-4 text-gray-700 leading-relaxed text-lg">
-              While generally well-tolerated, ACE inhibitors can cause several side effects, including:
-            </p>
-            <ul className="list-disc pl-8 mb-8 text-gray-700 leading-relaxed text-lg">
-              <li>Dry cough (up to 20% of patients)</li>
-              <li>Hyperkalemia (especially in patients with renal impairment)</li>
-              <li>Angioedema (rare but potentially life-threatening)</li>
-              <li>Hypotension (more common in patients with heart failure or volume depletion)</li>
-              <li>Acute kidney injury (in patients with renal artery stenosis)</li>
-            </ul>
-            <SideEffectsDiagram />
-            <p className="mb-4 text-gray-700 leading-relaxed text-lg">
-              ACE inhibitors are contraindicated in pregnancy, especially during the second and third trimesters, due to the risk of fetal renal damage and other congenital abnormalities.
-            </p>
-            <p className="mb-4 text-gray-700 leading-relaxed text-lg">
-              Caution should be exercised in patients with renal impairment, as ACE inhibitors can further decrease renal function and cause hyperkalemia.
-            </p>
-          </Section>
-  
-          <Section
-            title="Clinical Evidence and Guidelines"
-            icon={Stethoscope}
-            keyTakeaway="Major clinical trials and guidelines support the use of ACE inhibitors in various cardiovascular conditions."
-            onComplete={updateCompletedSections}
-          >
-            <p className="mb-4 text-gray-700 leading-relaxed text-lg">
-              ACE inhibitors have been extensively studied in numerous clinical trials, providing strong evidence for their efficacy and safety in various cardiovascular conditions.
-            </p>
-            <ul className="list-disc pl-8 mb-8 text-gray-700 leading-relaxed text-lg">
-              <li>
-                <strong>HOPE Trial:</strong> Ramipril reduced the risk of cardiovascular events in high-risk patients with vascular disease or diabetes.
-              </li>
-              <li>
-                <strong>SOLVD Trial:</strong> Enalapril improved survival and reduced hospitalizations in patients with heart failure with reduced ejection fraction.
-              </li>
-              <li>
-                <strong>CONSENSUS Trial:</strong> Enalapril reduced mortality in severe heart failure.
-              </li>
-              <li>
-                <strong>AIRE Trial:</strong> Ramipril reduced mortality after acute myocardial infarction.
-              </li>
-            </ul>
-            <p className="mb-4 text-gray-700 leading-relaxed text-lg">
-              Based on this evidence, major guidelines from organizations such as the American College of Cardiology (ACC), American Heart Association (AHA), and European Society of Cardiology (ESC) recommend the use of ACE inhibitors in various cardiovascular conditions, including hypertension, heart failure, and post-myocardial infarction.
-            </p>
-            <motion.div
-              className="bg-gradient-to-r from-green-100 to-green-200 p-6 rounded-2xl shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <h3 className="font-semibold mb-4 text-green-800 text-2xl">Clinical Practice Tip:</h3>
-              <p className="text-gray-700 leading-relaxed text-lg">When initiating ACE inhibitors, start at a low dose and titrate up gradually while monitoring blood pressure, renal function, and potassium levels. In heart failure, aim for target doses used in clinical trials for optimal benefits.</p>
-            </motion.div>
-          </Section>
-      
-          <Section
-            title="Test Your Knowledge"
-            icon={CheckCircle}
-            keyTakeaway="Reinforce your understanding of ACE Inhibitors with this interactive quiz."
-            onComplete={updateCompletedSections}
-          >
-            <Quiz />
-          </Section>
-        </div>
-      </div>
-    </div>
-  );
-};
+              </motion.div>
+            ))}
+          </div>
+        </Section>
 
-export default ACEInhibitorsGuideComponent;
-  export default ACEInhibitorsGuide;
+        <Section
+          title="Clinical Indications"
+          icon={BookOpen}
+          keyTakeaway="ACE inhibitors are widely used in hypertension, heart failure, diabetic nephropathy, and other cardiovascular conditions."
+          onComplete={updateCompletedSections}
+        >
+          <p className="mb-4 text-gray-700 leading-relaxed text-lg">
+            ACE inhibitors are commonly prescribed for the following conditions:
+          </p>
+          <ul className="list-disc pl-8 mb-8 text-gray-700 leading-relaxed text-lg">
+            <li>Hypertension</li>
+            <li>Heart failure</li>
+            <li>Diabetic nephropathy</li>
+            <li>Myocardial infarction (heart attack)</li>
+            <li>Left ventricular dysfunction</li>
+            <li>Chronic kidney disease</li>
+          </ul>
+          <p className="mb-4 text-gray-700 leading-relaxed text-lg">
+            In hypertension, ACE inhibitors are often used as first-line therapy or in combination with other antihypertensive medications. They are particularly effective in patients with diabetes, heart failure, or kidney disease.
+          </p>
+          <p className="mb-4 text-gray-700 leading-relaxed text-lg">
+            In heart failure, ACE inhibitors have been shown to improve symptoms, reduce hospitalizations, and prolong survival. They are recommended for all patients with heart failure with reduced ejection fraction (HFrEF) unless contraindicated.
+          </p>
+          <p className="mb-4 text-gray-700 leading-relaxed text-lg">
+            For patients with diabetic nephropathy, ACE inhibitors can slow the progression of kidney disease and reduce the risk of cardiovascular events.
+          </p>
+        </Section>
+
+        <Section
+          title="Side Effects and Precautions"
+          icon={AlertTriangle}
+          keyTakeaway="Common side effects include cough, hyperkalemia, and angioedema. ACE inhibitors are contraindicated in pregnancy."
+          onComplete={updateCompletedSections}
+        >
+          <p className="mb-4 text-gray-700 leading-relaxed text-lg">
+            While generally well-tolerated, ACE inhibitors can cause several side effects, including:
+          </p>
+          <ul className="list-disc pl-8 mb-8 text-gray-700 leading-relaxed text-lg">
+            <li>Dry cough (up to 20% of patients)</li>
+            <li>Hyperkalemia (especially in patients with renal impairment)</li>
+            <li>Angioedema (rare but potentially life-threatening)</li>
+            <li>Hypotension (more common in patients with heart failure or volume depletion)</li>
+            <li>Acute kidney injury (in patients with renal artery stenosis)</li>
+          </ul>
+          <SideEffectsDiagram />
+          <p className="mb-4 text-gray-700 leading-relaxed text-lg">
+            ACE inhibitors are contraindicated in pregnancy, especially during the second and third trimesters, due to the risk of fetal renal damage and other congenital abnormalities.
+          </p>
+          <p className="mb-4 text-gray-700 leading-relaxed text-lg">
+            Caution should be exercised in patients with renal impairment, as ACE inhibitors can further decrease renal function and cause hyperkalemia.
+          </p>
+        </Section>
+
+        <Section
+          title="Clinical Evidence and Guidelines"
+          icon={Stethoscope}
+          keyTakeaway="Major clinical trials and guidelines support the use of ACE inhibitors in various cardiovascular conditions."
+          onComplete={updateCompletedSections}
+        >
+          <p className="mb-4 text-gray-700 leading-relaxed text-lg">
+            ACE inhibitors have been extensively studied in numerous clinical trials, providing strong evidence for their efficacy and safety in various cardiovascular conditions.
+          </p>
+          <ul className="list-disc pl-8 mb-8 text-gray-700 leading-relaxed text-lg">
+            <li>
+              <strong>HOPE Trial:</strong> Ramipril reduced the risk of cardiovascular events in high-risk patients with vascular disease or diabetes.
+            </li>
+            <li>
+              <strong>SOLVD Trial:</strong> Enalapril improved survival and reduced hospitalizations in patients with heart failure with reduced ejection fraction.
+            </li>
+            <li>
+              <strong>CONSENSUS Trial:</strong> Enalapril reduced mortality in severe heart failure.
+            </li>
+            <li>
+              <strong>AIRE Trial:</strong> Ramipril reduced mortality after acute myocardial infarction.
+            </li>
+          </ul>
+          <p className="mb-4 text-gray-700 leading-relaxed text-lg">
+            Based on this evidence, major guidelines from organizations such as the American College of Cardiology (ACC), American Heart Association (AHA), and European Society of Cardiology (ESC) recommend the use of ACE inhibitors in various cardiovascular conditions, including hypertension, heart failure, and post-myocardial infarction.
+          </p>
+          <motion.div
+            className="bg-gradient-to-r from-green-100 to-green-200 p-6 rounded-2xl shadow-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h3 className="font-semibold mb-4 text-green-800 text-2xl">Clinical Practice Tip:</h3>
+            <p className="text-gray-700 leading-relaxed text-lg">When initiating ACE inhibitors, start at a low dose and titrate up gradually while monitoring blood pressure, renal function, and potassium levels. In heart failure, aim for target doses used in clinical trials for optimal benefits.</p>
+          </motion.div>
+        </Section>
+    
+        <Section
+          title="Test Your Knowledge"
+          icon={CheckCircle}
+          keyTakeaway="Reinforce your understanding of ACE Inhibitors with this interactive quiz."
+          onComplete={updateCompletedSections}
+        >
+          <Quiz />
+        </Section>
+      </div>
+      <Footer />
+    </div>
+    export default ACEInhibitorsGuide;
