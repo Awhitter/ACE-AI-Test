@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/ACE-AI-Test/static/css/main.7506a4ba.css",
-    "main.js": "/ACE-AI-Test/static/js/main.0b347a74.js",
-    "index.html": "/ACE-AI-Test/index.html",
-    "main.7506a4ba.css.map": "/ACE-AI-Test/static/css/main.7506a4ba.css.map",
-    "main.0b347a74.js.map": "/ACE-AI-Test/static/js/main.0b347a74.js.map"
+    "main.css": "./static/css/main.7506a4ba.css",
+    "main.js": "./static/js/main.0b347a74.js",
+    "index.html": "./index.html",
+    "main.7506a4ba.css.map": "./static/css/main.7506a4ba.css.map",
+    "main.0b347a74.js.map": "./static/js/main.0b347a74.js.map"
   },
   "entrypoints": [
     "static/css/main.7506a4ba.css",
