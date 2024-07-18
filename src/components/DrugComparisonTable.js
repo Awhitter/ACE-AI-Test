@@ -64,9 +64,9 @@ const DrugComparisonTable = () => {
   ];
 
   return (
-    <div className="overflow-x-auto bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl shadow-2xl p-8">
-      <h3 className="text-4xl font-bold mb-8 text-blue-800 text-center">ACE Inhibitor Comparison</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+    <div className="overflow-x-auto bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl shadow-2xl p-4 sm:p-8">
+      <h3 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-blue-800 text-center">ACE Inhibitor Comparison</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-8">
         {drugs.map((drug) => (
           <motion.div
             key={drug.name}
@@ -75,23 +75,23 @@ const DrugComparisonTable = () => {
             onMouseLeave={() => setHoveredDrug(null)}
             whileHover={{ scale: 1.03 }}
           >
-            <div className={`bg-gradient-to-br from-${drug.color}-100 to-${drug.color}-200 p-6`}>
-              <h4 className={`text-2xl font-bold text-${drug.color}-700 mb-4`}>{drug.name}</h4>
-              <div className="flex items-center text-gray-700 mb-3">
-                <Pill className="w-6 h-6 mr-3" />
-                <span className="text-lg">{drug.dosage}</span>
+            <div className={`bg-gradient-to-br from-${drug.color}-100 to-${drug.color}-200 p-4 sm:p-6`}>
+              <h4 className={`text-xl sm:text-2xl font-bold text-${drug.color}-700 mb-3 sm:mb-4`}>{drug.name}</h4>
+              <div className="flex items-center text-gray-700 mb-2 sm:mb-3">
+                <Pill className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+                <span className="text-base sm:text-lg">{drug.dosage}</span>
               </div>
-              <div className="flex items-center text-gray-700 mb-3">
-                <Clock className="w-6 h-6 mr-3" />
-                <span className="text-lg">Half-life: {drug.halfLife}</span>
+              <div className="flex items-center text-gray-700 mb-2 sm:mb-3">
+                <Clock className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+                <span className="text-base sm:text-lg">Half-life: {drug.halfLife}</span>
               </div>
-              <div className="flex items-center text-gray-700 mb-3">
-                <Droplet className="w-6 h-6 mr-3" />
-                <span className="text-lg">Renal Excretion: {drug.renalExcretion}</span>
+              <div className="flex items-center text-gray-700 mb-2 sm:mb-3">
+                <Droplet className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+                <span className="text-base sm:text-lg">Renal Excretion: {drug.renalExcretion}</span>
               </div>
               <div className="flex items-center text-gray-700">
-                <Coffee className="w-6 h-6 mr-3" />
-                <span className="text-lg">Food Effect: {drug.foodEffect}</span>
+                <Coffee className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+                <span className="text-base sm:text-lg">Food Effect: {drug.foodEffect}</span>
               </div>
             </div>
             <AnimatePresence>
@@ -101,35 +101,35 @@ const DrugComparisonTable = () => {
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="p-6 bg-gray-50"
+                  className="p-4 sm:p-6 bg-gray-50"
                 >
-                  <div className="flex items-center text-gray-800 mb-3">
-                    <Heart className="w-6 h-6 mr-3 text-red-500" />
-                    <span className="font-semibold text-lg">Key Notes:</span>
+                  <div className="flex items-center text-gray-800 mb-2 sm:mb-3">
+                    <Heart className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-red-500" />
+                    <span className="font-semibold text-base sm:text-lg">Key Notes:</span>
                   </div>
-                  <p className="text-gray-700 mb-4 text-lg">{drug.details}</p>
-                  <div className="flex items-center text-gray-800 mb-3">
-                    <ThumbsUp className="w-6 h-6 mr-3 text-green-500" />
-                    <span className="font-semibold text-lg">Pros:</span>
+                  <p className="text-gray-700 mb-3 sm:mb-4 text-base sm:text-lg">{drug.details}</p>
+                  <div className="flex items-center text-gray-800 mb-2 sm:mb-3">
+                    <ThumbsUp className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-green-500" />
+                    <span className="font-semibold text-base sm:text-lg">Pros:</span>
                   </div>
-                  <p className="text-gray-700 mb-4 text-lg">{drug.pros}</p>
-                  <div className="flex items-center text-gray-800 mb-3">
-                    <ThumbsDown className="w-6 h-6 mr-3 text-red-500" />
-                    <span className="font-semibold text-lg">Cons:</span>
+                  <p className="text-gray-700 mb-3 sm:mb-4 text-base sm:text-lg">{drug.pros}</p>
+                  <div className="flex items-center text-gray-800 mb-2 sm:mb-3">
+                    <ThumbsDown className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-red-500" />
+                    <span className="font-semibold text-base sm:text-lg">Cons:</span>
                   </div>
-                  <p className="text-gray-700 text-lg">{drug.cons}</p>
+                  <p className="text-gray-700 text-base sm:text-lg">{drug.cons}</p>
                 </motion.div>
               )}
             </AnimatePresence>
           </motion.div>
         ))}
       </div>
-      <div className="mt-12 p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl border-l-8 border-yellow-400 shadow-lg">
-        <div className="flex items-center mb-4">
-          <AlertTriangle className="w-8 h-8 text-yellow-600 mr-4" />
-          <span className="text-2xl font-semibold text-yellow-800">Important Note:</span>
+      <div className="mt-8 sm:mt-12 p-4 sm:p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl border-l-8 border-yellow-400 shadow-lg">
+        <div className="flex items-center mb-3 sm:mb-4">
+          <AlertTriangle className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600 mr-3 sm:mr-4" />
+          <span className="text-xl sm:text-2xl font-semibold text-yellow-800">Important Note:</span>
         </div>
-        <p className="text-yellow-800 text-xl">
+        <p className="text-yellow-800 text-lg sm:text-xl">
           All ACE inhibitors end with the suffix '-pril'. They are contraindicated in pregnancy and should be used with caution in patients with renal artery stenosis or hyperkalemia.
         </p>
       </div>

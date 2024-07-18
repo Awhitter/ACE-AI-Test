@@ -113,8 +113,8 @@ const Quiz = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
-      <h2 className="text-3xl font-bold mb-6 text-center text-blue-800">ACE Inhibitors Quiz</h2>
+    <div className="max-w-2xl mx-auto bg-white shadow-2xl rounded-3xl p-4 sm:p-8">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center text-blue-800">ACE Inhibitors Quiz</h2>
       <AnimatePresence mode="wait">
         {!quizStarted ? (
           <motion.div
@@ -124,10 +124,10 @@ const Quiz = () => {
             exit={{ opacity: 0 }}
             className="text-center"
           >
-            <p className="text-xl mb-6">Test your knowledge about ACE Inhibitors!</p>
+            <p className="text-lg sm:text-xl mb-4 sm:mb-6">Test your knowledge about ACE Inhibitors!</p>
             <button
               onClick={startQuiz}
-              className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 text-lg font-semibold shadow-lg"
+              className="px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 text-base sm:text-lg font-semibold shadow-lg"
             >
               Start Quiz
             </button>
@@ -140,14 +140,14 @@ const Quiz = () => {
             exit={{ opacity: 0 }}
             className="text-center"
           >
-            <Award className="w-16 h-16 mx-auto mb-4 text-yellow-500" />
-            <h2 className="text-2xl font-bold mb-4">Quiz Completed!</h2>
-            <p className="text-xl mb-6">You scored {score} out of {quizQuestions.length}</p>
+            <Award className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 text-yellow-500" />
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Quiz Completed!</h2>
+            <p className="text-lg sm:text-xl mb-4 sm:mb-6">You scored {score} out of {quizQuestions.length}</p>
             <button
               onClick={resetQuiz}
-              className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 flex items-center mx-auto text-lg font-semibold shadow-lg"
+              className="px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 flex items-center mx-auto text-base sm:text-lg font-semibold shadow-lg"
             >
-              <RefreshCw className="w-5 h-5 mr-2" />
+              <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               Retake Quiz
             </button>
           </motion.div>
@@ -157,19 +157,19 @@ const Quiz = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
-            className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl shadow-inner"
+            className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 sm:p-6 rounded-2xl shadow-inner"
           >
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-blue-800">Question {currentQuestion + 1} of {quizQuestions.length}</h3>
-              <div className="text-lg font-semibold text-blue-600">Time left: {timeLeft}s</div>
+            <div className="flex justify-between items-center mb-3 sm:mb-4">
+              <h3 className="text-lg sm:text-xl font-bold text-blue-800">Question {currentQuestion + 1} of {quizQuestions.length}</h3>
+              <div className="text-base sm:text-lg font-semibold text-blue-600">Time left: {timeLeft}s</div>
             </div>
-            <p className="mb-6 text-lg">{quizQuestions[currentQuestion].question}</p>
-            <div className="space-y-3">
+            <p className="mb-4 sm:mb-6 text-base sm:text-lg">{quizQuestions[currentQuestion].question}</p>
+            <div className="space-y-2 sm:space-y-3">
               {quizQuestions[currentQuestion].options.map((option, index) => (
                 <motion.button
                   key={index}
                   onClick={() => handleAnswerClick(index)}
-                  className={`w-full p-3 text-left rounded-lg transition-colors duration-200 flex items-center
+                  className={`w-full p-2 sm:p-3 text-left rounded-lg transition-colors duration-200 flex items-center
                     ${selectedAnswer === null
                       ? 'bg-white hover:bg-blue-50 shadow-md'
                       : selectedAnswer === index
@@ -184,12 +184,12 @@ const Quiz = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className="flex-grow text-lg">{option}</span>
+                  <span className="flex-grow text-base sm:text-lg">{option}</span>
                   {selectedAnswer !== null && index === quizQuestions[currentQuestion].correctAnswer && (
-                    <CheckCircle className="w-6 h-6 text-green-500 ml-2" />
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 ml-2" />
                   )}
                   {selectedAnswer === index && index !== quizQuestions[currentQuestion].correctAnswer && (
-                    <XCircle className="w-6 h-6 text-red-500 ml-2" />
+                    <XCircle className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 ml-2" />
                   )}
                 </motion.button>
               ))}
@@ -200,9 +200,9 @@ const Quiz = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="mt-6 p-4 bg-blue-100 rounded-lg border-l-4 border-blue-500"
+                  className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-100 rounded-lg border-l-4 border-blue-500"
                 >
-                  <p className="text-blue-800 text-lg">{quizQuestions[currentQuestion].explanation}</p>
+                  <p className="text-blue-800 text-base sm:text-lg">{quizQuestions[currentQuestion].explanation}</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -210,11 +210,11 @@ const Quiz = () => {
               <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 flex items-center mx-auto text-lg font-semibold shadow-lg"
+                className="mt-4 sm:mt-6 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 flex items-center mx-auto text-base sm:text-lg font-semibold shadow-lg"
                 onClick={handleNextQuestion}
               >
                 {currentQuestion < quizQuestions.length - 1 ? 'Next Question' : 'Finish Quiz'}
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </motion.button>
             )}
           </motion.div>
