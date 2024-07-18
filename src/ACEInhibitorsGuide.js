@@ -276,18 +276,15 @@ const ACEInhibitorsGuide = () => {
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-400"></div>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-7xl mx-auto bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen text-white">
       <FloatingActionButton />
-      <div className="relative overflow-hidden">
+      {isLoading ? (
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-400"></div>
+        </div>
+      ) : (
+        <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center opacity-10"></div>
         <div className="relative z-10 px-8 py-24">
           <motion.div
