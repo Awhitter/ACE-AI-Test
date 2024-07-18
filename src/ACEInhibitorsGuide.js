@@ -81,41 +81,24 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
     const scrollToTop = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
-    };
 
-  return (
-    <motion.div
-      className="fixed bottom-8 right-8 z-50"
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      whileHover={{ scale: 1.1 }}
-    >
-      <button
-        onClick={scrollToTop}
-        className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
+    return (
+      <motion.div
+        className="fixed bottom-8 right-8 z-50"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+        whileHover={{ scale: 1.1 }}
       >
-        <ArrowUp size={24} />
-      </button>
-    </motion.div>
-  );
-  return (
-    <motion.div
-      className="fixed bottom-8 right-8 z-50"
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      whileHover={{ scale: 1.1 }}
-    >
-      <button
-        onClick={scrollToTop}
-        className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
-      >
-        <ArrowUp size={24} />
-      </button>
-    </motion.div>
-  );
-};
+        <button
+          onClick={scrollToTop}
+          className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
+        >
+          <ArrowUp size={24} />
+        </button>
+      </motion.div>
+    );
+  };
 
 const ACEInhibitorsGuideComponent = () => {
   const [expandedDrugs, setExpandedDrugs] = useState({});
