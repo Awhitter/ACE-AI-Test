@@ -558,9 +558,10 @@ const ACEInhibitorsGuide = () => {
         <Section 
           title="Common ACE Inhibitors" 
           icon={Droplet}
-          keyTakeaway="Remember the mnemonic 'LERCA-B' for           onComplete={updateCompletedSections}
-          >
-            <p className="mb-8 text-gray-700 leading-relaxed text-xl">Key ACE Inhibitors to remember for the FNP exam (LERCA-B):</p>
+          keyTakeaway="Remember the mnemonic 'LERCA-B' for key drugs: Lisinopril, Enalapril, Ramipril, Captopril, Benazepril"
+          onComplete={updateCompletedSections}
+        >
+          <p className="mb-8 text-gray-700 leading-relaxed text-xl">Key ACE Inhibitors to remember for the FNP exam (LERCA-B):</p>
             <DrugComparisonTable drugs={drugs} />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 max-w-6xl mx-auto">
               {drugs.map((drug, index) => (
@@ -709,7 +710,9 @@ const ACEInhibitorsGuide = () => {
           </Section>
         </div>
       </div>
-    );
-  };
-      
+    </div>
+  );
+};
+
+export default ACEInhibitorsGuideComponent;
   export default ACEInhibitorsGuide;
