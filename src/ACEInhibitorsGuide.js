@@ -287,54 +287,59 @@ const ACEInhibitorsGuide = () => {
   }, [updateCompletedSections]);
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-extrabold text-gray-800 mb-8">ACE Inhibitors Guide</h1>
-        <p className="text-gray-700 leading-relaxed mb-12">
-          Welcome to our comprehensive guide on ACE inhibitors, a class of medications widely used in the treatment of various cardiovascular conditions. This guide will provide you with an in-depth understanding of ACE inhibitors, their mechanisms of action, clinical indications, dosing considerations, and potential side effects.
-        </p>
-        <div className="space-y-12">
-          {totalSections > 0 && (
-            <div className="mb-8">
-              <p className="text-gray-700 mb-2">Sections Completed: {completedSections.length}/{totalSections}</p>
-              <div className="h-4 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-blue-500 rounded-full transition-all duration-500"
-                  style={{ width: `${(completedSections.length / totalSections) * 100}%` }}
-                ></div>
-              </div>
+    <div className="max-w-4xl mx-auto p-6 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+      <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-blue-600">
+          ACE Inhibitors: Interactive Learning Guide
+        </span>
+      </h1>
+      <p className="text-gray-700 leading-relaxed mb-12">
+        Welcome to our comprehensive guide on ACE inhibitors, a class of medications widely used in the treatment of various cardiovascular conditions. This guide will provide you with an in-depth understanding of ACE inhibitors, their mechanisms of action, clinical indications, dosing considerations, and potential side effects.
+      </p>
+      <div className="space-y-6">
+        {totalSections > 0 && (
+          <div className="mb-8">
+            <p className="text-gray-700 mb-2">Sections Completed: {completedSections.length}/{totalSections}</p>
+            <div className="h-4 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-blue-500 rounded-full transition-all duration-500"
+                style={{ width: `${(completedSections.length / totalSections) * 100}%` }}
+              ></div>
             </div>
-          )}
-          <div>
-            <Section
-              title="Introduction"
-              icon={Droplet}
-              keyTakeaway="ACE inhibitors are a class of medications used to treat various cardiovascular conditions, including hypertension, heart failure, and diabetic nephropathy."
-              onComplete={updateCompletedSections}
-            >
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Angiotensin-converting enzyme (ACE) inhibitors are a widely used class of medications that work by inhibiting the activity of the ACE enzyme, which is responsible for converting angiotensin I to angiotensin II, a potent vasoconstrictor.
-              </p>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                By blocking the formation of angiotensin II, ACE inhibitors help to dilate blood vessels, reduce blood pressure, and improve blood flow. They are commonly prescribed for the treatment of hypertension, heart failure, diabetic nephropathy, and other cardiovascular conditions.
-              </p>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                This comprehensive guide will provide an overview of ACE inhibitors, their mechanisms of action, clinical indications, dosing considerations, and potential side effects. Additionally, we will explore the latest clinical evidence and guidelines for their use in various cardiovascular conditions.
-              </p>
-            </Section>
+          </div>
+        )}
+        <Section
+          title="Introduction"
+          icon={Droplet}
+          keyTakeaway="ACE inhibitors are a class of medications used to treat various cardiovascular conditions, including hypertension, heart failure, and diabetic nephropathy."
+          onComplete={updateCompletedSections}
+        >
+          <p className="text-gray-700 leading-relaxed mb-4">
+            Angiotensin-converting enzyme (ACE) inhibitors are a widely used class of medications that work by inhibiting the activity of the ACE enzyme, which is responsible for converting angiotensin I to angiotensin II, a potent vasoconstrictor.
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            By blocking the formation of angiotensin II, ACE inhibitors help to dilate blood vessels, reduce blood pressure, and improve blood flow. They are commonly prescribed for the treatment of hypertension, heart failure, diabetic nephropathy, and other cardiovascular conditions.
+          </p>
+        </Section>
 
-            <Section
-              title="Mechanism of Action"
-              icon={Stethoscope}
-              keyTakeaway="ACE inhibitors block the conversion of angiotensin I to angiotensin II, leading to vasodilation and reduced blood pressure."
-              onComplete={updateCompletedSections}
-            >
-              <p className="text-gray-700 leading-relaxed mb-4">
-                The primary mechanism of action of ACE inhibitors is to block the conversion of angiotensin I to angiotensin II, a potent vasoconstrictor. This process is mediated by the angiotensin-converting enzyme (ACE), which is found primarily in the lungs and vascular endothelium.
-              </p>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                By inhibiting the formation of angiotensin II, ACE inhibitors cause vasodilation, which leads to a reduction in blood pressure. Additionally, ACE inhibitors decrease the secretion of aldosterone, a hormone that promotes sodium and water retention, further contributing to their blood pressure-lowering effects.
-              </p>
+        <Section
+          title="Mechanism of Action"
+          icon={Zap}
+          keyTakeaway="ACE inhibitors block the conversion of angiotensin I to angiotensin II, leading to vasodilation and reduced blood pressure."
+          onComplete={updateCompletedSections}
+        >
+          <p className="text-gray-700 leading-relaxed mb-4">
+            ACE Inhibitors work by blocking the conversion of Angiotensin I to Angiotensin II in the renin-angiotensin-aldosterone system (RAAS). This leads to several beneficial effects:
+          </p>
+          <ul className="list-disc pl-5 space-y-2 mb-6 text-gray-700">
+            <li>Decreased vasoconstriction</li>
+            <li>Reduced aldosterone secretion</li>
+            <li>Lowered blood pressure</li>
+            <li>Decreased workload on the heart</li>
+            <li>Improved blood flow to kidneys</li>
+          </ul>
+          <InteractiveDiagram />
+        </Section>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Beyond their effects on the renin-angiotensin-aldosterone system, ACE inhibitors also have other beneficial effects, such as improving endothelial function, reducing oxidative stress, and inhibiting the breakdown of bradykinin, a vasodilator.
               </p>
