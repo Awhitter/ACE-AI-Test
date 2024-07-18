@@ -260,22 +260,6 @@ const ACEInhibitorsGuide = () => {
 
   const totalSections = 4;
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-600"></div>
-      </div>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-600"></div>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-7xl mx-auto bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen text-white">
       <FloatingActionButton />
@@ -284,34 +268,35 @@ const ACEInhibitorsGuide = () => {
           <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-400"></div>
         </div>
       ) : (
-        <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center opacity-10"></div>
-        <div className="relative z-10 px-8 py-24">
-          <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-          >
-            <h1 className="text-7xl font-black mb-6 text-center leading-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                ACE Inhibitors
-              </span>
-            </h1>
-            <p className="text-3xl text-center text-blue-200 mb-12 font-light">Essential knowledge for FNP ANCC Nurse Practitioner Exam</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-            className="flex justify-center"
-          >
-            <a href="#content" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
-              Start Learning
-            </a>
-          </motion.div>
-        </div>
-      </div>
-      <div id="content" className="p-8">
+        <>
+          <div className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center opacity-10"></div>
+            <div className="relative z-10 px-8 py-24">
+              <motion.div
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              >
+                <h1 className="text-7xl font-black mb-6 text-center leading-tight">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                    ACE Inhibitors
+                  </span>
+                </h1>
+                <p className="text-3xl text-center text-blue-200 mb-12 font-light">Essential knowledge for FNP ANCC Nurse Practitioner Exam</p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+                className="flex justify-center"
+              >
+                <a href="#content" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+                  Start Learning
+                </a>
+              </motion.div>
+            </div>
+          </div>
+          <div id="content" className="p-8">
 
       <motion.div 
         className="mb-12 bg-white rounded-2xl p-6 shadow-xl"
