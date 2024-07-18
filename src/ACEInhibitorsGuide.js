@@ -117,7 +117,7 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
   );
 };
 
-const ACEInhibitorsGuideComponent = () => {
+const ACEInhibitorsGuide = () => {
   const [expandedDrugs, setExpandedDrugs] = useState({});
   const [completedSections, setCompletedSections] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -187,6 +187,64 @@ const ACEInhibitorsGuideComponent = () => {
   return (
     <div className="max-w-7xl mx-auto bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen text-white">
       <FloatingActionButton />
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center opacity-10"></div>
+        <div className="relative z-10 px-8 py-24">
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          >
+            <h1 className="text-7xl font-black mb-6 text-center leading-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                ACE Inhibitors
+              </span>
+            </h1>
+            <p className="text-3xl text-center text-blue-200 mb-12 font-light">Essential knowledge for FNP ANCC Nurse Practitioner Exam</p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <motion.div
+                className="p-6 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 shadow-xl transition-all duration-300 hover:shadow-2xl cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                <Heart className="w-12 h-12 mb-4 text-white" />
+                <h3 className="text-2xl font-bold mb-2 text-white">Mechanism of Action</h3>
+                <p className="text-gray-200 leading-relaxed">Learn how ACE inhibitors work to lower blood pressure and reduce the workload on the heart.</p>
+              </motion.div>
+              <motion.div
+                className="p-6 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 shadow-xl transition-all duration-300 hover:shadow-2xl cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
+                <Zap className="w-12 h-12 mb-4 text-white" />
+                <h3 className="text-2xl font-bold mb-2 text-white">Clinical Indications</h3>
+                <p className="text-gray-200 leading-relaxed">Explore the various cardiovascular conditions where ACE inhibitors are widely used.</p>
+              </motion.div>
+              <motion.div
+                className="p-6 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 shadow-xl transition-all duration-300 hover:shadow-2xl cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1 }}
+              >
+                <AlertTriangle className="w-12 h-12 mb-4 text-white" />
+                <h3 className="text-2xl font-bold mb-2 text-white">Side Effects</h3>
+                <p className="text-gray-200 leading-relaxed">Understand the potential side effects of ACE inhibitors and how to manage them.</p>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center opacity-10"></div>
         <div className="relative z-10 px-8 py-24">
