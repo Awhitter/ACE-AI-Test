@@ -23,26 +23,26 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
   return (
     <motion.div
       ref={ref}
-      className="mb-8 rounded-2xl overflow-hidden shadow-xl bg-white"
-      initial={{ opacity: 0, y: 20 }}
+      className="mb-12 rounded-3xl overflow-hidden shadow-2xl bg-white"
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <motion.button
-        className="w-full text-left p-6 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 transition-colors flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        className="w-full text-left p-8 bg-gradient-to-r from-blue-700 to-indigo-800 hover:from-blue-800 hover:to-indigo-900 transition-all duration-300 flex items-center justify-between focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50"
         onClick={toggleOpen}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
       >
-        <span className="flex items-center text-2xl font-bold text-white">
-          <Icon className="w-8 h-8 mr-4 text-blue-200" />
+        <span className="flex items-center text-3xl font-extrabold text-white">
+          <Icon className="w-10 h-10 mr-5 text-blue-100" />
           {title}
         </span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.4 }}
         >
-          <ChevronDown className="w-7 h-7 text-blue-200" />
+          <ChevronDown className="w-8 h-8 text-blue-100" />
         </motion.div>
       </motion.button>
       <AnimatePresence>
@@ -51,23 +51,23 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
           >
             {keyTakeaway && (
               <motion.div
-                className="p-4 bg-yellow-100 border-l-4 border-yellow-500"
-                initial={{ opacity: 0, y: -10 }}
+                className="p-6 bg-gradient-to-r from-yellow-100 to-yellow-200 border-l-8 border-yellow-400"
+                initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
               >
                 <div className="flex items-center">
-                  <Star className="w-5 h-5 text-yellow-600 mr-2" />
-                  <span className="font-semibold text-yellow-800">Key Takeaway:</span>
+                  <Star className="w-6 h-6 text-yellow-600 mr-3" />
+                  <span className="font-bold text-xl text-yellow-800">Key Takeaway:</span>
                 </div>
-                <p className="mt-1 text-yellow-900">{keyTakeaway}</p>
+                <p className="mt-2 text-yellow-900 text-lg">{keyTakeaway}</p>
               </motion.div>
             )}
-            <div className="p-8 bg-gradient-to-b from-white to-blue-50">{children}</div>
+            <div className="p-10 bg-gradient-to-b from-white to-blue-50">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -191,7 +191,7 @@ const ACEInhibitorsGuide = () => {
 
   useEffect(() => {
     // Simulate loading time
-    const timer = setTimeout(() => setIsLoading(false), 1000);
+    const timer = setTimeout(() => setIsLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -202,7 +202,7 @@ const ACEInhibitorsGuide = () => {
   const drugs = useMemo(() => [
     { 
       name: 'Lisinopril', 
-      color: 'bg-teal-100 border-teal-500 text-teal-800',
+      color: 'bg-gradient-to-r from-teal-100 to-teal-200 border-teal-500 text-teal-800',
       dosage: '10-40 mg daily',
       halfLife: '12 hours',
       renalExcretion: '100%',
@@ -210,7 +210,7 @@ const ACEInhibitorsGuide = () => {
     },
     { 
       name: 'Enalapril', 
-      color: 'bg-cyan-100 border-cyan-500 text-cyan-800',
+      color: 'bg-gradient-to-r from-cyan-100 to-cyan-200 border-cyan-500 text-cyan-800',
       dosage: '5-40 mg daily (can be divided)',
       halfLife: '11 hours',
       renalExcretion: '88%',
@@ -218,7 +218,7 @@ const ACEInhibitorsGuide = () => {
     },
     { 
       name: 'Ramipril', 
-      color: 'bg-sky-100 border-sky-500 text-sky-800',
+      color: 'bg-gradient-to-r from-sky-100 to-sky-200 border-sky-500 text-sky-800',
       dosage: '2.5-20 mg daily',
       halfLife: '13-17 hours',
       renalExcretion: '60%',
@@ -226,7 +226,7 @@ const ACEInhibitorsGuide = () => {
     },
     { 
       name: 'Captopril', 
-      color: 'bg-blue-100 border-blue-500 text-blue-800',
+      color: 'bg-gradient-to-r from-blue-100 to-blue-200 border-blue-500 text-blue-800',
       dosage: '25-150 mg daily (divided doses)',
       halfLife: '2 hours',
       renalExcretion: '95%',
@@ -234,7 +234,7 @@ const ACEInhibitorsGuide = () => {
     },
     { 
       name: 'Benazepril',
-      color: 'bg-indigo-100 border-indigo-500 text-indigo-800',
+      color: 'bg-gradient-to-r from-indigo-100 to-indigo-200 border-indigo-500 text-indigo-800',
       dosage: '10-40 mg daily',
       halfLife: '10-11 hours',
       renalExcretion: '88%',
@@ -246,40 +246,45 @@ const ACEInhibitorsGuide = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-8 bg-gradient-to-br from-gray-50 to-blue-100 min-h-screen text-gray-800">
+    <div className="max-w-7xl mx-auto p-8 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen text-gray-800">
       <FloatingActionButton />
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
       >
-        <h1 className="text-6xl font-extrabold mb-4 text-center">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-cyan-600">
+        <h1 className="text-7xl font-black mb-6 text-center leading-tight">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
             ACE Inhibitors: FNP Exam Prep Guide
           </span>
         </h1>
-        <p className="text-2xl text-center text-gray-700 mb-16 font-light">Master the essentials for your FNP ANCC Nurse Practitioner Licensing Exam</p>
+        <p className="text-3xl text-center text-gray-700 mb-20 font-light">Master the essentials for your FNP ANCC Nurse Practitioner Licensing Exam</p>
       </motion.div>
 
-      <div className="mb-8 bg-white rounded-lg p-4 shadow-md">
-        <h2 className="text-2xl font-bold mb-2 text-blue-800">Your Progress</h2>
-        <div className="w-full bg-gray-200 rounded-full h-2.5">
+      <motion.div 
+        className="mb-12 bg-white rounded-2xl p-6 shadow-xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <h2 className="text-3xl font-bold mb-4 text-blue-800">Your Progress</h2>
+        <div className="w-full bg-gray-200 rounded-full h-4">
           <motion.div
-            className="bg-blue-600 h-2.5 rounded-full"
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 h-4 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${(completedSections / totalSections) * 100}%` }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           />
         </div>
-        <p className="text-right mt-2 text-gray-600">{completedSections} of {totalSections} sections completed</p>
-      </div>
+        <p className="text-right mt-3 text-lg text-gray-600 font-semibold">{completedSections} of {totalSections} sections completed</p>
+      </motion.div>
 
       <Section 
         title="Mechanism of Action" 
