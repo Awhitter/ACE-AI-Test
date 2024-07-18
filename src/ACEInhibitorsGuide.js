@@ -6,7 +6,6 @@ import Timeline from './components/Timeline';
 import SideEffectsDiagram from './components/SideEffectsDiagram';
 import DrugComparisonTable from './components/DrugComparisonTable';
 import Quiz from './components/Quiz';
-import InteractiveDiagram from './components/InteractiveDiagram';
 
 const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -2,11 +2,6 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, PlusCircle, MinusCircle, Activity, Star, ArrowUp, CheckCircle } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
-import Timeline from './components/Timeline';
-import SideEffectsDiagram from './components/SideEffectsDiagram';
-import DrugComparisonTable from './components/DrugComparisonTable';
-import Quiz from './components/Quiz';
-import InteractiveDiagram from './components/InteractiveDiagram';
 
 const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -407,3 +402,6 @@ const ACEInhibitorsGuide = () => {
 };
     
 export default ACEInhibitorsGuide;
+import Timeline from '../Timeline';
+import SideEffectsDiagram from '../SideEffectsDiagram';
+import Quiz from '../Quiz';
