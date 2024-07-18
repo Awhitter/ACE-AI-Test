@@ -95,8 +95,8 @@ const InteractiveDiagram = () => {
       transition={{ duration: 0.5 }}
     >
       <h3 className="font-bold mb-8 text-3xl text-blue-900 text-center">ACE Inhibitor Mechanism of Action</h3>
-      <div className="relative">
-        <svg className="w-full h-64" viewBox="0 0 800 200">
+      <div className="relative mb-12">
+        <svg className="w-full h-auto" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet">
           <defs>
             <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
               <polygon points="0 0, 10 3.5, 0 7" fill="#4B5563" />
@@ -142,12 +142,12 @@ const InteractiveDiagram = () => {
         </svg>
         {showInfo && (
           <motion.div
-            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-white rounded-xl shadow-lg max-w-md"
+            className="absolute left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-white rounded-xl shadow-lg max-w-md w-full"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
           >
-            <p className="text-gray-800">{components.find(c => c.name === showInfo).info}</p>
+            <p className="text-gray-800 text-center">{components.find(c => c.name === showInfo).info}</p>
           </motion.div>
         )}
       </div>
