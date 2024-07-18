@@ -117,21 +117,7 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
   );
 };
 
-const ACEInhibitorsGuide = () => {
-  const [expandedDrugs, setExpandedDrugs] = useState({});
-  const [completedSections, setCompletedSections] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const updateCompletedSections = useCallback(() => {
-    setCompletedSections(prev => Math.min(prev + 1, totalSections));
-  }, []);
-
-  const drugs = useMemo(() => [
+// ACEInhibitorsGuide component starts here
     { 
       name: 'Lisinopril', 
       color: 'bg-gradient-to-r from-teal-100 to-teal-200 border-teal-500 text-teal-800',
