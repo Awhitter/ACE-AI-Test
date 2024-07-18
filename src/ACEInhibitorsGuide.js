@@ -29,7 +29,7 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <motion.button
-        className="w-full text-left p-8 bg-gradient-to-r from-blue-700 to-indigo-800 hover:from-blue-800 hover:to-indigo-900 transition-all duration-300 flex items-center justify-between focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50"
+        className="w-full text-left p-8 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 flex items-center justify-between focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50"
         onClick={toggleOpen}
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
@@ -55,7 +55,7 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
           >
             {keyTakeaway && (
               <motion.div
-                className="p-6 bg-gradient-to-r from-yellow-100 to-yellow-200 border-l-8 border-yellow-400"
+                className="p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 border-l-8 border-yellow-400"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.4 }}
@@ -117,8 +117,10 @@ const InteractiveDiagram = () => {
                 onMouseEnter={() => { setHighlight(component.name); setShowInfo(component.name); }}
                 onMouseLeave={() => { setHighlight(null); setShowInfo(null); }}
               />
-              <text textAnchor="middle" dy=".3em" className="text-sm font-semibold fill-current text-gray-800">
-                {component.label}
+              <text textAnchor="middle" dy=".3em" fontSize="12" className="font-semibold fill-current text-gray-800">
+                {component.label.split(' ').map((word, i) => (
+                  <tspan key={i} x="0" dy={i ? "1.2em" : "0"}>{word}</tspan>
+                ))}
               </text>
               <defs>
                 <radialGradient id={`gradient-${component.color}`}>
@@ -283,12 +285,12 @@ const ACEInhibitorsGuide = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
       >
-        <h1 className="text-7xl font-black mb-6 text-center leading-tight">
+        <h1 className="text-6xl font-black mb-6 text-center leading-tight">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-            ACE Inhibitors: FNP Exam Prep Guide
+            ACE Inhibitors
           </span>
         </h1>
-        <p className="text-3xl text-center text-gray-700 mb-20 font-light">Master the essentials for your FNP ANCC Nurse Practitioner Licensing Exam</p>
+        <p className="text-2xl text-center text-gray-700 mb-12 font-light">Essential knowledge for FNP ANCC Nurse Practitioner Exam</p>
       </motion.div>
 
       <motion.div 
@@ -493,8 +495,6 @@ const ACEInhibitorsGuide = () => {
           <p className="text-gray-700 leading-relaxed text-lg">When initiating ACE inhibitors, start at a low dose and titrate up gradually while monitoring blood pressure, renal function, and potassium levels. In heart failure, aim for target doses used in clinical trials for optimal benefits.</p>
         </motion.div>
       </Section>
-
-      {/* Key Takeaways section removed as it's now integrated into each section */}
     </div>
   );
 };
