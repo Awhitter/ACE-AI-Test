@@ -25,19 +25,19 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
   return (
     <motion.div
       ref={ref}
-      className="mb-12 rounded-3xl overflow-hidden shadow-2xl bg-white"
+      className="mb-16 rounded-3xl overflow-hidden shadow-2xl bg-white"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <motion.button
-        className="w-full text-left p-8 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 flex items-center justify-between focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50"
+        className="w-full text-left p-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-between focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50"
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
       >
         <span className="flex items-center text-3xl font-extrabold text-white">
-          <Icon className="w-10 h-10 mr-5 text-blue-100" />
+          <Icon className="w-12 h-12 mr-5 text-blue-100" />
           {title}
         </span>
         <motion.div
@@ -57,18 +57,18 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
           >
             {keyTakeaway && (
               <motion.div
-                className="p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 border-l-8 border-yellow-400"
+                className="p-8 bg-gradient-to-r from-yellow-50 to-orange-50 border-l-8 border-yellow-400"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.4 }}
               >
                 <div className="flex items-center">
-                  <span className="font-bold text-xl text-yellow-800">Key Takeaway:</span>
+                  <span className="font-bold text-2xl text-yellow-800">Key Takeaway:</span>
                 </div>
-                <p className="mt-2 text-yellow-900 text-lg">{keyTakeaway}</p>
+                <p className="mt-4 text-yellow-900 text-xl">{keyTakeaway}</p>
               </motion.div>
             )}
-            <div className="p-10 bg-gradient-to-b from-white to-blue-50">{children}</div>
+            <div className="p-12 bg-gradient-to-b from-white to-blue-50">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -91,9 +91,9 @@ const FloatingActionButton = () => {
     >
       <button
         onClick={scrollToTop}
-        className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
+        className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
       >
-        <ArrowUp size={24} />
+        <ArrowUp size={28} />
       </button>
     </motion.div>
   );
@@ -167,22 +167,22 @@ const ACEInhibitorsGuide = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen text-white">
+    <div className="max-w-7xl mx-auto bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 min-h-screen text-white">
       <FloatingActionButton />
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center opacity-10"></div>
-        <div className="relative z-10 px-8 py-24">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center opacity-5"></div>
+        <div className="relative z-10 px-8 py-32">
           <motion.div
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
           >
-            <h1 className="text-7xl font-black mb-6 text-center leading-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            <h1 className="text-8xl font-black mb-8 text-center leading-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
                 ACE Inhibitors
               </span>
             </h1>
-            <p className="text-3xl text-center text-blue-200 mb-12 font-light">Essential knowledge for FNP ANCC Nurse Practitioner Exam</p>
+            <p className="text-3xl text-center text-blue-200 mb-16 font-light">Essential knowledge for FNP ANCC Nurse Practitioner Exam</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -190,7 +190,7 @@ const ACEInhibitorsGuide = () => {
             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
             className="flex justify-center"
           >
-            <a href="#content" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+            <a href="#content" className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-4 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg">
               Start Learning
             </a>
           </motion.div>
