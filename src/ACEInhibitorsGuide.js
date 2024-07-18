@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, PlusCircle, MinusCircle, Activity, Star, ArrowUp } from 'lucide-react';
+import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, PlusCircle, MinusCircle, Activity, Star, ArrowUp, Clock, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Timeline from './components/Timeline';
+import SideEffectsDiagram from './components/SideEffectsDiagram';
+import DrugComparisonTable from './components/DrugComparisonTable';
+import Quiz from './components/Quiz';
 
 const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -313,6 +317,7 @@ const ACEInhibitorsGuide = () => {
           <li>Improved blood flow to kidneys</li>
         </ul>
         <InteractiveDiagram />
+        <Timeline />
       </Section>
 
       <Section 
@@ -322,6 +327,7 @@ const ACEInhibitorsGuide = () => {
         onComplete={updateCompletedSections}
       >
         <p className="mb-8 text-gray-700 leading-relaxed text-xl">Key ACE Inhibitors to remember for the FNP exam (LERCA-B):</p>
+        <DrugComparisonTable drugs={drugs} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 max-w-6xl mx-auto">
           {drugs.map((drug, index) => (
             <motion.div
@@ -407,6 +413,7 @@ const ACEInhibitorsGuide = () => {
         onComplete={updateCompletedSections}
       >
         <p className="mb-8 text-gray-700 leading-relaxed text-xl">Key side effects and monitoring parameters for ACE Inhibitors:</p>
+        <SideEffectsDiagram />
         <ul className="space-y-6 mb-10">
           {[
             { effect: 'Dry cough', detail: 'Due to increased bradykinin levels. May require switching to ARB.' },
@@ -481,6 +488,15 @@ const ACEInhibitorsGuide = () => {
           <h3 className="font-semibold mb-4 text-green-800 text-2xl">Clinical Practice Tip:</h3>
           <p className="text-gray-700 leading-relaxed text-lg">When initiating ACE inhibitors, start at a low dose and titrate up gradually while monitoring blood pressure, renal function, and potassium levels. In heart failure, aim for target doses used in clinical trials for optimal benefits.</p>
         </motion.div>
+      </Section>
+
+      <Section
+        title="Test Your Knowledge"
+        icon={CheckCircle}
+        keyTakeaway="Reinforce your understanding of ACE Inhibitors with this interactive quiz."
+        onComplete={updateCompletedSections}
+      >
+        <Quiz />
       </Section>
     </div>
   );
