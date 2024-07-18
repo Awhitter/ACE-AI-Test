@@ -75,7 +75,7 @@ const Quiz = () => {
     if (selectedIndex === quizQuestions[currentQuestion].correctAnswer) {
       setScore(prevScore => prevScore + 1);
     }
-  }, [currentQuestion, quizQuestions]);
+  }, [currentQuestion]);
 
   useEffect(() => {
     if (quizStarted && timeLeft > 0 && !showExplanation) {
