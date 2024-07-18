@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, PlusCircle, MinusCircle, Activity, Star, ArrowUp, CheckCircle } from 'lucide-react';
+import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, Star, CheckCircle } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import Timeline from './components/Timeline';
-import SideEffectsDiagram from './components/SideEffectsDiagram';
+import SideEffectsDiagram from './components/S
 import DrugComparisonTable from './components/DrugComparisonTable';
 import Quiz from './components/Quiz';
 
@@ -100,7 +100,7 @@ const ACEInhibitorsGuide = () => {
           <p className="text-gray-700 leading-relaxed mb-4">
             ACE inhibitors work by binding to and inhibiting the ACE enzyme, thereby preventing the formation of angiotensin II. This leads to a decrease in vasoconstriction, reduced blood pressure, and improved blood flow to various organs, including the heart, kidneys, and brain.
           </p>
-          <InteractiveDiagram />
+          {/* InteractiveDiagram component removed */}
         </Section>
 
         <Section
@@ -279,7 +279,7 @@ const ACEInhibitorsGuide = () => {
               <p className="text-gray-700 leading-relaxed mb-4">
                 Beyond their effects on the renin-angiotensin-aldosterone system, ACE inhibitors also have other beneficial effects, such as improving endothelial function, reducing oxidative stress, and inhibiting the breakdown of bradykinin, a vasodilator.
               </p>
-              <InteractiveDiagram />
+              {/* InteractiveDiagram component removed */}
               title="Clinical Indications"
               icon={BookOpen}
               keyTakeaway="ACE inhibitors are widely used in the treatment of hypertension, heart failure, diabetic nephropathy, and other cardiovascular conditions."
