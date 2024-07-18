@@ -107,11 +107,21 @@ const ACEInhibitorsGuide = ({ debug = false }) => {
   const [completedSections, setCompletedSections] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [expandedDrugs, setExpandedDrugs] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1500);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      if (Math.random() > 0.9) { // Simulate occasional error
+        setError(new Error('Failed to load content'));
+      }
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  if (error) {
+    return <div className="text-red-500">Error: {error.message}</div>;
+  }
 
   const updateCompletedSections = useCallback(() => {
     setCompletedSections(prev => Math.min(prev + 1, totalSections));
