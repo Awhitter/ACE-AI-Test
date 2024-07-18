@@ -69,6 +69,14 @@ const Quiz = () => {
   const [timeLeft, setTimeLeft] = useState(30);
   const [quizStarted, setQuizStarted] = useState(false);
 
+  const handleAnswerClick = useCallback((selectedIndex) => {
+    setSelectedAnswer(selectedIndex);
+    setShowExplanation(true);
+    if (selectedIndex === quizQuestions[currentQuestion].correctAnswer) {
+      setScore(prevScore => prevScore + 1);
+    }
+  }, [currentQuestion]);
+
   useEffect(() => {
     if (quizStarted && timeLeft > 0 && !showExplanation) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
@@ -77,8 +85,6 @@ const Quiz = () => {
       handleAnswerClick(null);
     }
   }, [timeLeft, quizStarted, showExplanation, handleAnswerClick]);
-
-  const handleAnswerClick = useCallback((selectedIndex) => {
     setSelectedAnswer(selectedIndex);
     setShowExplanation(true);
     if (selectedIndex === quizQuestions[currentQuestion].correctAnswer) {
