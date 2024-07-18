@@ -1,12 +1,8 @@
 import React from 'react';
 import ACEInhibitorsGuide from './ACEInhibitorsGuide';
 
-function App() {
-  return (
-    <div className="App">
-      <ACEInhibitorsGuide />
-    </div>
-  );
-}
+const App = () => (
+  <ACEInhibitorsGuide />
+);
 
 export default App;

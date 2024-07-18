@@ -23,9 +23,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Debug - List contents of build directory
-        run: ls -R build
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -35,5 +32,5 @@ jobs:
 
       - name: Debug - Display GitHub Pages URL
         run: |
-          echo "GitHub Pages URL: https://awhitter.github.io/ACE-AI-Test/"
+          echo "GitHub Pages URL: https://awhitter.github.io/ACE-AI-Test"
           echo "If the deployment was successful, your site should be available at the above URL."
