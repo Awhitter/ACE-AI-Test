@@ -421,6 +421,7 @@ const ACEInhibitorsGuide = () => {
         title="Evidence-Based Practice" 
         icon={BookOpen}
         keyTakeaway="Provide cardiovascular and renal protection beyond blood pressure lowering. Contraindicated in pregnancy and bilateral renal artery stenosis."
+        onComplete={updateCompletedSections}
       >
         <p className="mb-8 text-gray-700 leading-relaxed text-xl">Key clinical trials and guidelines:</p>
         <ul className="space-y-6 mb-10">
