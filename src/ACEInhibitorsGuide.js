@@ -76,16 +76,18 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
 };
 
 const InteractiveDiagram = () => {
-  const [highlight, setHighlight] = useState(null);
-  const [showInfo, setShowInfo] = useState(null);
+  const [activeStep, setActiveStep] = useState(0);
 
-  const components = useMemo(() => [
-    { name: 'renin', label: 'Renin', color: 'blue', info: 'Enzyme released by kidneys in response to low blood pressure' },
-    { name: 'angiotensinogen', label: 'Angiotensinogen', color: 'green', info: 'Precursor protein produced by the liver' },
-    { name: 'angiotensin1', label: 'Angiotensin I', color: 'yellow', info: 'Inactive decapeptide formed from angiotensinogen' },
-    { name: 'ace', label: 'ACE', color: 'purple', info: 'Angiotensin Converting Enzyme, target of ACE inhibitors' },
-    { name: 'angiotensin2', label: 'Angiotensin II', color: 'red', info: 'Active octapeptide, potent vasoconstrictor' },
-  ], []);
+  const steps = [
+    { label: 'Renin', description: 'Released by kidneys in response to low blood pressure' },
+    { label: 'Angiotensinogen', description: 'Precursor protein produced by the liver' },
+    { label: 'Angiotensin I', description: 'Inactive decapeptide formed from angiotensinogen' },
+    { label: 'ACE', description: 'Angiotensin Converting Enzyme, target of ACE inhibitors' },
+    { label: 'Angiotensin II', description: 'Active octapeptide, potent vasoconstrictor' },
+  ];
+
+  const nextStep = () => setActiveStep((prev) => (prev + 1) % steps.length);
+  const prevStep = () => setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
 
   return (
     <motion.div
@@ -96,67 +98,47 @@ const InteractiveDiagram = () => {
     >
       <h3 className="font-bold mb-8 text-3xl text-blue-900 text-center">ACE Inhibitor Mechanism of Action</h3>
       <div className="relative mb-12">
-        <svg className="w-full h-auto max-w-3xl mx-auto" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-              <polygon points="0 0, 10 3.5, 0 7" fill="#4B5563" />
-            </marker>
-          </defs>
-          <line x1="100" y1="100" x2="700" y2="100" stroke="#4B5563" strokeWidth="2" markerEnd="url(#arrowhead)" />
-          {components.map((component, index) => (
-            <g key={component.name} transform={`translate(${100 + index * 150}, 100)`}>
-              <motion.circle
-                r="40"
-                fill={highlight === component.name ? `url(#gradient-${component.color})` : '#fff'}
-                stroke={`#${component.color}600`}
-                strokeWidth="3"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: index * 0.1, type: 'spring', stiffness: 300, damping: 20 }}
-                whileHover={{ scale: 1.1 }}
-                onMouseEnter={() => { setHighlight(component.name); setShowInfo(component.name); }}
-                onMouseLeave={() => { setHighlight(null); setShowInfo(null); }}
-              />
-              <text textAnchor="middle" dy=".3em" fontSize="12" className="font-semibold fill-current text-gray-800">
-                {component.label.split(' ').map((word, i) => (
-                  <tspan key={i} x="0" dy={i ? "1.2em" : "0"}>{word}</tspan>
-                ))}
-              </text>
-              <defs>
-                <radialGradient id={`gradient-${component.color}`}>
-                  <stop offset="0%" stopColor={`#${component.color}200`} />
-                  <stop offset="100%" stopColor={`#${component.color}400`} />
-                </radialGradient>
-              </defs>
-            </g>
+        <div className="flex justify-center items-center space-x-4">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.label}
+              className={`w-40 h-40 rounded-full flex items-center justify-center ${
+                index === activeStep ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'
+              } border-4 border-blue-500 cursor-pointer transition-colors duration-300`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveStep(index)}
+            >
+              <span className="text-lg font-semibold text-center px-2">{step.label}</span>
+            </motion.div>
           ))}
-          {highlight === 'ace' && (
-            <motion.line
-              x1="400" y1="100" x2="550" y2="100"
-              stroke="#EF4444"
-              strokeWidth="4"
-              strokeDasharray="8,8"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.5 }}
-            />
-          )}
-        </svg>
-        {showInfo && (
-          <AnimatePresence>
-            {showInfo && (
-              <motion.div
-                className="absolute left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-white rounded-xl shadow-lg max-w-md w-full"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-              >
-                <p className="text-gray-800 text-center">{components.find(c => c.name === showInfo).info}</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        )}
+        </div>
+        <div className="mt-8 text-center">
+          <motion.p
+            key={activeStep}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="text-xl text-gray-700"
+          >
+            {steps[activeStep].description}
+          </motion.p>
+        </div>
+      </div>
+      <div className="flex justify-center space-x-4 mt-8">
+        <button
+          onClick={prevStep}
+          className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors duration-300"
+        >
+          Previous
+        </button>
+        <button
+          onClick={nextStep}
+          className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors duration-300"
+        >
+          Next
+        </button>
       </div>
       <motion.div
         className="mt-12 p-6 bg-white bg-opacity-90 rounded-2xl shadow-lg"
