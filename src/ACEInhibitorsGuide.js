@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, Star, CheckCircle } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
