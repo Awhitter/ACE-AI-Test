@@ -466,6 +466,7 @@ const ACEInhibitorsGuide = () => {
           <Quiz />
         </Section>
       </div>
+      <Footer />
     </div>
   );
 };
