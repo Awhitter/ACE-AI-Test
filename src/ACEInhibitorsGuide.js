@@ -305,9 +305,9 @@ const ACEInhibitorsGuide = () => {
         transition={{ duration: 0.6, delay: 0.4 }}
       >
         <h2 className="text-3xl font-bold mb-4 text-blue-800">Your Progress</h2>
-        <div className="w-full bg-gray-200 rounded-full h-4">
+        <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
           <motion.div
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 h-4 rounded-full"
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 h-4"
             initial={{ width: 0 }}
             animate={{ width: `${(completedSections / totalSections) * 100}%` }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
