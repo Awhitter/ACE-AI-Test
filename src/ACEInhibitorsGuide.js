@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, CheckCircle, ArrowUp } from 'lucide-react';
+import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, CheckCircle, ArrowUp, MinusCircle, PlusCircle } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import Timeline from './components/Timeline';
 import SideEffectsDiagram from './components/SideEffectsDiagram';
