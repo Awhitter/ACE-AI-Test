@@ -101,7 +101,7 @@ const FloatingActionButton = () => {
   );
 };
 
-const ACEInhibitorsGuide = () => {
+const ACEInhibitorsGuideComponent = () => {
   const [expandedDrugs, setExpandedDrugs] = useState({});
   const [completedSections, setCompletedSections] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -171,6 +171,7 @@ const ACEInhibitorsGuide = () => {
   return (
     <div className="max-w-7xl mx-auto bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen text-white">
       <FloatingActionButton />
+      {/* ... (rest of the code) */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center opacity-10"></div>
         <div className="relative z-10 px-8 py-24">
