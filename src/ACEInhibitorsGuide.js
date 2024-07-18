@@ -64,10 +64,67 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
 
 const ACEInhibitorsGuide = () => {
   const [completedSections, setCompletedSections] = useState([]);
+  const [highlightedDrug, setHighlightedDrug] = useState(null);
 
   const updateCompletedSections = useCallback(() => {
     setCompletedSections((prevSections) => [...prevSections, Date.now()]);
   }, []);
+
+  const drugs = [
+    { name: 'Lisinopril', color: 'bg-blue-50 hover:bg-blue-100 border-blue-200' },
+    { name: 'Enalapril', color: 'bg-green-50 hover:bg-green-100 border-green-200' },
+    { name: 'Ramipril', color: 'bg-yellow-50 hover:bg-yellow-100 border-yellow-200' },
+    { name: 'Captopril', color: 'bg-red-50 hover:bg-red-100 border-red-200' },
+    { name: 'Benazepril', color: 'bg-purple-50 hover:bg-purple-100 border-purple-200' }
+  ];
+
+  const InteractiveDiagram = () => {
+    const [highlight, setHighlight] = useState(null);
+  
+    return (
+      <div className="mt-6 p-6 bg-gray-50 rounded-lg shadow-inner">
+        <h3 className="font-semibold mb-4 text-lg text-gray-800">Interactive ACE Inhibitor Mechanism:</h3>
+        <div className="flex items-center justify-center space-x-8 relative">
+          <div 
+            className={`text-center transition-all duration-300 ${highlight === 'angiotensin1' ? 'scale-110' : ''}`}
+            onMouseEnter={() => setHighlight('angiotensin1')}
+            onMouseLeave={() => setHighlight(null)}
+          >
+            <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center mb-2 border-2 border-blue-300">
+              <span className="font-semibold text-blue-800">Angiotensin I</span>
+            </div>
+            <p className="text-sm text-gray-600">Inactive</p>
+          </div>
+          <div 
+            className={`relative transition-all duration-300 ${highlight === 'ace' ? 'scale-110' : ''}`}
+            onMouseEnter={() => setHighlight('ace')}
+            onMouseLeave={() => setHighlight(null)}
+          >
+            <div className="w-24 h-1 bg-red-500"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-3 py-1 rounded-full text-sm border-2 border-red-500 font-semibold text-red-700">
+              ACE
+            </div>
+          </div>
+          <div 
+            className={`text-center transition-all duration-300 ${highlight === 'angiotensin2' ? 'scale-110' : ''}`}
+            onMouseEnter={() => setHighlight('angiotensin2')}
+            onMouseLeave={() => setHighlight(null)}
+          >
+            <div className="w-24 h-24 rounded-full bg-red-100 flex items-center justify-center mb-2 border-2 border-red-300">
+              <span className="font-semibold text-red-800">Angiotensin II</span>
+            </div>
+            <p className="text-sm text-gray-600">Active</p>
+          </div>
+        </div>
+        <p className="mt-6 text-center text-sm font-medium text-indigo-600">
+          {highlight === 'angiotensin1' && "Angiotensin I is the inactive precursor."}
+          {highlight === 'ace' && "ACE Inhibitors block this conversion enzyme."}
+          {highlight === 'angiotensin2' && "Angiotensin II causes vasoconstriction and aldosterone release."}
+          {!highlight && "Hover over elements to learn more."}
+        </p>
+      </div>
+    );
+  };
 
   const totalSections = useMemo(() => {
     return React.Children.toArray(
@@ -84,24 +141,25 @@ const ACEInhibitorsGuide = () => {
           <p className="text-gray-700 leading-relaxed mb-4">
             By blocking the formation of angiotensin II, ACE inhibitors help to dilate blood vessels, reduce blood pressure, and improve blood flow. They are commonly prescribed for the treatment of hypertension, heart failure, diabetic nephropathy, and other cardiovascular conditions.
           </p>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            This comprehensive guide will provide an overview of ACE inhibitors, their mechanisms of action, clinical indications, dosing considerations, and potential side effects. Additionally, we will explore the latest clinical evidence and guidelines for their use in various cardiovascular conditions.
-          </p>
         </Section>
 
         <Section
           title="Mechanism of Action"
-          icon={Stethoscope}
+          icon={Zap}
           keyTakeaway="ACE inhibitors block the conversion of angiotensin I to angiotensin II, leading to vasodilation and reduced blood pressure."
           onComplete={updateCompletedSections}
         >
           <p className="text-gray-700 leading-relaxed mb-4">
-            The renin-angiotensin-aldosterone system (RAAS) plays a crucial role in regulating blood pressure and fluid balance in the body. The ACE enzyme is a key component of this system, responsible for converting the inactive angiotensin I into the potent vasoconstrictor angiotensin II.
+            ACE Inhibitors work by blocking the conversion of Angiotensin I to Angiotensin II in the renin-angiotensin-aldosterone system (RAAS). This leads to several beneficial effects:
           </p>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            ACE inhibitors work by binding to and inhibiting the ACE enzyme, thereby preventing the formation of angiotensin II. This leads to a decrease in vasoconstriction, reduced blood pressure, and improved blood flow to various organs, including the heart, kidneys, and brain.
-          </p>
-          {/* InteractiveDiagram component removed */}
+          <ul className="list-disc pl-5 space-y-2 mb-6 text-gray-700">
+            <li>Decreased vasoconstriction</li>
+            <li>Reduced aldosterone secretion</li>
+            <li>Lowered blood pressure</li>
+            <li>Decreased workload on the heart</li>
+            <li>Improved blood flow to kidneys</li>
+          </ul>
+          <InteractiveDiagram />
         </Section>
 
         <Section
