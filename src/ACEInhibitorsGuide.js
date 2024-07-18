@@ -240,7 +240,7 @@ const ACEInhibitorsGuide = () => {
       renalExcretion: '88%',
       notes: 'Prodrug. High lipophilicity, good tissue penetration.'
     }
-  ];
+  ], []);
 
   const totalSections = 4;
 
