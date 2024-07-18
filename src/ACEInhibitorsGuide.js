@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, PlusCircle, MinusCircle, Activity, Star, ArrowUp, CheckCircle, Heart } from 'lucide-react';
+import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, PlusCircle, MinusCircle, CheckCircle, ArrowUp } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import Timeline from './components/Timeline';
 import SideEffectsDiagram from './components/SideEffectsDiagram';
@@ -64,7 +64,6 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
                 transition={{ delay: 0.2, duration: 0.4 }}
               >
                 <div className="flex items-center">
-                  <Star className="w-6 h-6 text-yellow-600 mr-3" />
                   <span className="font-bold text-xl text-yellow-800">Key Takeaway:</span>
                 </div>
                 <p className="mt-2 text-yellow-900 text-lg">{keyTakeaway}</p>
@@ -76,32 +75,32 @@ const Section = ({ title, icon: Icon, children, keyTakeaway, onComplete }) => {
       </AnimatePresence>
     </motion.div>
   );
-  
-  const FloatingActionButton = () => {
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+};
 
-    return (
-      <motion.div
-        className="fixed bottom-8 right-8 z-50"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
-        whileHover={{ scale: 1.1 }}
-      >
-        <button
-          onClick={scrollToTop}
-          className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
-        >
-          <ArrowUp size={24} />
-        </button>
-      </motion.div>
-    );
+const FloatingActionButton = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-const ACEInhibitorsGuideComponent = () => {
-  const [expandedDrugs, setExpandedDrugs] = useState({});
+  return (
+    <motion.div
+      className="fixed bottom-8 right-8 z-50"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.1 }}
+    >
+      <button
+        onClick={scrollToTop}
+        className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
+      >
+        <ArrowUp size={24} />
+      </button>
+    </motion.div>
+  );
+};
+
+const ACEInhibitorsGuide = () => {
   const [completedSections, setCompletedSections] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -157,7 +156,7 @@ const ACEInhibitorsGuideComponent = () => {
     }
   ], []);
 
-  const totalSections = 5; // Updated to include the quiz section
+  const totalSections = 5;
 
   if (isLoading) {
     return (
@@ -284,7 +283,7 @@ const ACEInhibitorsGuideComponent = () => {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                  </motion.div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
