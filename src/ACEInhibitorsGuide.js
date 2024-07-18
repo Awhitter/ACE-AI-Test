@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Droplet, AlertTriangle, Stethoscope, BookOpen, Zap, Star, CheckCircle } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import Timeline from './components/Timeline';
-import SideEffectsDiagram from './components/S
+import SideEffectsDiagram from './components/SideEffectsDiagram';
 import DrugComparisonTable from './components/DrugComparisonTable';
 import Quiz from './components/Quiz';
 

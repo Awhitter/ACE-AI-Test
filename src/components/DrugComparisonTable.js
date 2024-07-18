@@ -32,7 +32,7 @@ const DrugComparisonTable = () => {
       halfLife: '13-17 hours',
       renalExcretion: '60%',
       foodEffect: 'Absorption is reduced by 25-30%',
-      details: 'Ramipril has shown benefits in reducing cardiovascular events in high-risk patients, as demonstrated in the HOPE trial. It's often preferred in patients with cardiovascular risk factors.'
+      details: 'Ramipril has shown benefits in reducing cardiovascular events in high-risk patients, as demonstrated in the HOPE trial. It is often preferred in patients with cardiovascular risk factors.'
     },
   ];
 
